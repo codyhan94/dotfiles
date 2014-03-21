@@ -1,0 +1,11 @@
+[user]
+	name = Cody Han
+	email = codyhan94@gmail.com
+[credential]
+	helper = cache
+[color]
+	ui = true
+[core]
+	editor = vim
+	pager = less
+	autocrlf = input

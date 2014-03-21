@@ -1,0 +1,112 @@
+
+! ------- start other settings {{{
+URxvt*loginShell:   false
+!URxvt*font: xft:DejaVu Sans:pixelsize=9
+URxvt.scrollstype: plain
+URxvt.perl-ext-common: default,tabbed
+! --------- }}}
+! Some urxvt settings from online {{{
+    urxvt*imLocale:en_US.utf8
+    urxvt*depth:32
+    !urxvt*background:rgba:0000/0000/0000/dddd
+    !urxvt*foreground:white
+    urxvt*underlineColor:cyan
+    urxvt*buffered:false
+    urxvt*inheritPixmap:false
+    !urxvt*transparent:true
+    ! Shading: 0..100 = darker -1..-100 = lighter
+    !urxvt*shading:-50
+    ! Fading: higher number = darker shade on unfocus
+    urxvt*fading:40
+    urxvt*urlLauncher:luakit
+    !urxvt*font:xft:DejaVu Sans Mono:pixelsize=12
+    urxvt*font:xft:Inconsolata:Style=Medium:pixelsize=14
+    !urxvt*boldFont:xft:DejaVu Sans Mono:Bold:pixelsize=12
+    urxvt*boldFont:xft:Inconsolata:Bold:pixelsize=14
+    !urxvt*italicFont:xft:DejaVu Sans Mono:pixelsize=12
+    urxvt*italicFont:xft:Inconsolata:Italic:pixelsize=14
+    urxvt*letterSpace:0
+    urxvt*scrollStyle:xterm
+    urxvt*scrollBar_right:true
+    urxvt*scrollTtyOutput:false
+    urxvt*scrollTtyKeypress:true
+    urxvt*scrollWithBuffer:true
+    urxvt*jumpScroll:false
+    urxvt*saveLines:6400
+    urxvt*borderLess:false
+    urxvt*borderColor:black
+    urxvt*scrollBar_floating:true
+    !urxvt*internalBorder:4
+    urxvt*tripleclickwords:true
+! tmux makes tabs obsolete
+    urxvt*perl-ext-common:default,matcher,remote-clipboard
+    urxvt*url-launcher:/usr/bin/luakit
+    urxvt*keysym.M-u:perl:matcher:list
+    urxvt*keysym.Control-Up:\033[1;5A
+    urxvt*keysym.Control-Down:\033[1;5B
+    urxvt*keysym.Control-Left:\033[1;5D
+    urxvt*keysym.Control-Right:\033[1;5C
+    !urxvt*geometry:80x24
+! --- }}}
+! Font settings {{{
+Xft*antialias: true
+Xft*rgba: rgb
+Xft*hinting: true
+Xft*autohint: false
+Xft*lcdfilter: lcddefault
+Xft*hintstyle: hintfull
+Xft.dpi: 96
+xterm*faceName: SourceCodePro
+xterm*faceSize: 9
+xterm*allowBoldFonts: false
+! --- }}}
+! xterm settings {{{
+xterm*borderWidth: 0
+xterm*saveLines: 4096
+xterm*jumpScroll: true
+xterm*multiScroll: true
+xterm*fastScroll: true
+xterm*bellIsUrgent: true
+! }}}
+! colours for hybrid.vim (copied from Tomorrow-Night) {{{
+#define t_background #101010
+#define t_current_line #282a2e
+#define t_selection #373b41
+#define t_foreground #c5c8c6
+#define t_comment #969896
+#define t_red #cc6666
+#define t_orange #de935f
+#define t_yellow #f0c674
+#define t_green #b5bd68
+#define t_aqua #8abeb7
+#define t_blue #81a2be
+#define t_purple #b294bb
+!  
+! terminal colours
+*background: t_background
+*foreground: t_comment
+! black
+*color0: t_current_line
+*color8: t_selection
+! red
+*color1: #A54242
+*color9: t_red
+! green
+*color2: #8C9440
+*color10: t_green
+! yellow
+*color3: t_orange
+*color11: t_yellow
+! blue
+*color4: #5F819D
+*color12: t_blue
+! magenta
+*color5: #85678F
+*color13: t_purple
+! cyan
+*color6: #5E8D87
+*color14: t_aqua
+! white
+*color7: t_comment
+*color15: t_foreground
+! }}}

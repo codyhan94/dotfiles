@@ -1,0 +1,11 @@
+[credentials]
+user = bkubisiak
+host = 69.69.108.139
+
+[directories]
+archives
+documents
+images
+library
+misc
+videos

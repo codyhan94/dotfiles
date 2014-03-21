@@ -1,0 +1,59 @@
+# Modified Commands
+alias ls='ls -hF --color=auto'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias df='df -h'
+alias du='du -c -h'
+alias mkdir='mkdir -p -v'
+alias nano='nano -w'
+alias ping='ping -c 3'
+alias gcc='/usr/bin/gcc -Wall -Wstrict-prototypes -ansi -Wpedantic -Og -g'
+alias g++='/usr/bin/g++ -Wall -Og -g'
+
+# New Commands
+alias la='ls -h -al'
+alias ll='ls -h -l'
+alias da='date "+%A, %B %d, %Y [%T]"'
+alias du1='du --max-depth=1'
+alias path='echo $PATH'
+alias x='xterm &'
+alias t='terminology &'
+alias bat='acpi -b'
+alias sysinfo='acpi -V'
+alias gotosleep='sudo systemctl suspend'
+alias google='links www.google.com'
+alias gcc-fast='/usr/bin/gcc -Wall -Ofast -fomit-frame-pointer -march=native -mfpmath=sse -msse3 -DNDEBUG'
+alias g++-fast='/usr/bin/g++ -Wall -Ofast -fomit-frame-pointer -march=native -mfpmath=sse -msse3 -DNDEBUG'
+alias beavernet='sudo netcfg beavernet'
+alias beavernetd='sudo netcfg down beavernet'
+alias homenet='sudo netcfg home'
+alias homenetd='sudo netcfg down home'
+alias aptnet='sudo netcfg aptnine'
+alias aptnetd='sudo netcfg down aptnine'
+alias mkchroot='sudo makechrootpkg -c -r $CHROOT'
+alias gsmerge='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=temp.pdf'
+alias gssplit='gs -sDEVICE=pdfwrite -dSAFER -o temp.%d.pdf'
+alias matrix='mplayer -vo matrixview:cols=256:rows=256'
+alias reconky='conky -c ~/.config/conky/systeminfo && conky -c ~/.config/conky/notifications'
+alias averykrb='sudo echo wAtE8a2W | kinit chhan@AVERY.CALTECH.EDU'
+alias no='yes n'
+alias rkupd='sudo rkhunter --propupd'
+alias rkhunt='sudo rkhunter --check --noappend-log --skip-keypress'
+alias ssh-sess='eval $(ssh-agent) && ssh-add'
+alias caltechvpn='sudo openconnect -b --script ~/bin/vpnc-script --authgroup 1-Tunnel-Caltech-Traffic-Only -u chhan https://vpn.caltech.edu'
+
+# Pacman
+alias pac="sudo /usr/bin/pacman -S"             # install one or more packages
+alias paca="/usr/bin/yaourt -S"                 # install package from AUR
+alias pacu="sudo /usr/bin/yaourt -Syua"          # upgrade all packages
+alias pacau="/usr/bin/yaourt -u"                 # check AUR for upgrades
+alias pacr="sudo /usr/bin/pacman -Rs"           # uninstall one or more packages
+alias pacs="/usr/bin/pacman -Ss"                # search for a package
+alias pacas="/usr/bin/yaourt -s"                 # search for a package in AUR
+alias pacq="/usr/bin/pacman -Q | grep"          # search installed packages
+alias paclo="/usr/bin/pacman -Qdt"              # list all orphaned packages
+alias pacc="yes | sudo /usr/bin/pacman -Scc"    # clean cache
+alias pacsiz="/usr/bin/pacman -Qi | egrep '^(Installed|Name)' | cut -f2 -d':' | tr '\nK' ' \n' | sed 's/iB//' | sort -nrk2"
+alias pacdep='for i in $(pacman -Qeq); do; echo $i "$(pactree -d 1 $i | wc -l)"; done | sort -nrk2'
+# remove all orphaned packages
+alias pacro='/usr/bin/pacman -Qtdq > /dev/null && sudo /usr/bin/pacman -Rs $(/usr/bin/pacman -Qtdq)'
