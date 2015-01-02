@@ -50,7 +50,7 @@ which require an initialization must be listed explicitly in the list.")
               ("prod" "Insert products without limits" "\\prod_{?}^{}" cdlatex-position-cursor nil nil t)
               ("prodl" "Insert products" "\\prod\\limits_{?}^{}" cdlatex-position-cursor nil nil t)
               ("fl" "Insert floors" "\\biggl\\lfloor? \\biggr\\rfloor" cdlatex-position-cursor nil nil t)
-              
+
               ("axm" "Insert axiom env" "" cdlatex-environment ("axiom") t nil)
               ("thr" "Insert theorem env" "" cdlatex-environment ("theorem") t nil)
               ("lem" "Insert lemma env" "" cdlatex-environment ("lemma") t nil)
@@ -58,17 +58,27 @@ which require an initialization must be listed explicitly in the list.")
               ("prop" "Insert proposition env" "" cdlatex-environment ("proposition") t nil)
               ("wts" "Insert want to show env" "" cdlatex-environment ("wts") t nil)
               ("def" "Insert definition env" "" cdlatex-environment ("definition") t nil)
+              ("sci" "Insert scinot macro" "\\scinot{?}{}" cdlatex-position-cursor nil t t)
+              ("nf" "Insert nicefrac macro" "\\nicefrac{?}{}" cdlatex-position-cursor nil t t)
               ))
-      
-      
-      
+
+      (setq cdlatex-math-symbol-alist
+            '(
+              (?> ("\\geq" "\\longrightarrow" "\\max"))
+              (?< ("\\leq" "\\longleftarrow" "\\min"))
+              (?= ("&=" "\\equiv" "\\Longleftrightarrow"))
+              (?~ ("\\approx" "\\simeq" "\\sim"))
+              )
+            )
+
+
       (setq cdlatex-math-modify-alist
             '(
               (?t "\\text" nil t nil nil)
               (?s "\\mathscr" nil t nil nil)
               ))
-      
-      
+
+
       (setq cdlatex-env-alist
             '(("axiom" "\\begin{axiom}\nAUTOLABEL\n?\n\\end{axiom}\n" nil)
               ("theorem" "\\begin{theorem}\nAUTOLABEL\n?\n\\end{theorem}\n" nil)
@@ -78,9 +88,9 @@ which require an initialization must be listed explicitly in the list.")
               ("wts" "\\begin{wts}\nAUTOLABEL\n?\n\\end{wts}\n" nil)
               ("definition" "\\begin{definition}\nAUTOLABEL\n?\n\\end{definition}\n" nil)
               ))
-      
-      
-      
+
+
+
       (add-hook 'LaTeX-mode-hook
                 (lambda ()
                   (LaTeX-add-environments
@@ -92,7 +102,7 @@ which require an initialization must be listed explicitly in the list.")
                    '("wts" LaTeX-env-label)
                    '("definition" LaTeX-env-label)
                    )))
-      
+
       (setq reftex-label-alist
             '(("axiom" ?a "ax:" "~\\ref{%s}" t ("axiom" "ax.") -2)
               ("theorem" ?h "thr:" "~\\ref{%s}" t ("theorem" "th.") -3)
@@ -175,5 +185,5 @@ which require an initialization must be listed explicitly in the list.")
                   (local-set-key (kbd "<f12>") 'my-insert-header)
 
                   ))
-      
+
       )))

@@ -10,7 +10,7 @@
  ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
  dotspacemacs-configuration-layer-path '()
  ;; List of configuration layers to load.
- dotspacemacs-configuration-layers '(auctex cdlatex)
+ dotspacemacs-configuration-layers '(auctex cdlatex haskell)
  ;; A list of packages and/or extensions that will not be install and loaded.
  dotspacemacs-excluded-packages '()
 )
@@ -89,6 +89,10 @@ This function is called at the very end of Spacemacs initialization."
 
     (spacemacs/set-font "PragmataPro" 10)
     (key-chord-define-global ";;" 'comment-or-uncomment-region-or-line)
+
+    ;; Follow symlinks without asking. Bypasses version control systems
+    (setq vc-follow-symlinks t)
+
     ;; This is moved to fd for spacemacs so that jk can be used for other things.
     ;; (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
     ;; (load-theme 'sanityinc-tomorrow-night t)
@@ -101,5 +105,29 @@ This function is called at the very end of Spacemacs initialization."
 
 ;; Do not write anything in this section. This is where Emacs will
 ;; auto-generate custom variable definitions.
-
-
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(TeX-view-program-list
+   (quote
+    (("skim" "/Applications/Skim.app/Contents/MacOS/Skim %o"))))
+ '(TeX-view-program-selection
+   (quote
+    ((output-dvi "open")
+     (output-pdf "Skim")
+     (output-html "open"))))
+ '(ac-ispell-requires 4)
+ '(ahs-case-fold-search nil)
+ '(ahs-default-range (quote ahs-range-whole-buffer))
+ '(ahs-idle-interval 0.25)
+ '(ahs-idle-timer 0 t)
+ '(ahs-inhibit-face-list nil)
+ '(ring-bell-function (quote ignore) t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
