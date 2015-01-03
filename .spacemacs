@@ -72,6 +72,9 @@
 (defun dotspacemacs/init ()
   "User initialization for Spacemacs. This function is called at the very
  startup."
+  (progn
+    (global-linum-mode t)
+    )
   )
 
 (defun dotspacemacs/config ()
@@ -93,9 +96,47 @@ This function is called at the very end of Spacemacs initialization."
     ;; Follow symlinks without asking. Bypasses version control systems
     (setq vc-follow-symlinks t)
 
+    ;; A bunch of insert state commands so that insert mode is still emacs
+    (define-key evil-insert-state-map "\C-e" 'end-of-line)
+    (define-key evil-visual-state-map "\C-e" 'evil-end-of-line)
+    (define-key evil-insert-state-map "\C-f" 'evil-forward-char)
+    (define-key evil-insert-state-map "\C-b" 'evil-backward-char)
+    (define-key evil-visual-state-map "\C-b" 'evil-backward-char)
+    (define-key evil-insert-state-map "\C-d" 'evil-delete-char)
+    (define-key evil-visual-state-map "\C-d" 'evil-delete-char)
+    (define-key evil-insert-state-map "\C-n" 'evil-next-line)
+    (define-key evil-visual-state-map "\C-n" 'evil-next-line)
+    (define-key evil-insert-state-map "\C-p" 'evil-previous-line)
+    (define-key evil-visual-state-map "\C-p" 'evil-previous-line)
+    (define-key evil-insert-state-map "\C-w" 'evil-delete-backward-word)
+    (define-key evil-visual-state-map "\C-w" 'evil-delete)
+    (define-key evil-normal-state-map "\C-u" 'evil-scroll-up)
+    (define-key evil-visual-state-map "\C-u" 'evil-scroll-up)
+    ;; (define-key evil-normal-state-map "\C-y" 'yank)
+    ;; (define-key evil-insert-state-map "\C-y" 'yank)
+    ;; (define-key evil-visual-state-map "\C-y" 'yank)
+    (define-key evil-insert-state-map "\C-k" 'kill-line)
+    (define-key evil-visual-state-map "\C-k" 'kill-line)
+    (define-key evil-normal-state-map "0" 'evil-beginning-of-line)
+    ;; Custom move commands, like in vim. Visual and normal modes
+    (define-key evil-normal-state-map "H" 'evil-first-non-blank)
+    (define-key evil-normal-state-map "L" 'evil-end-of-line)
+    (define-key evil-normal-state-map "0" 'evil-beginning-of-line)
+    (define-key evil-visual-state-map "H" 'evil-first-non-blank)
+    (define-key evil-visual-state-map "L" 'evil-end-of-line)
+    (define-key evil-visual-state-map "k" 'evil-previous-visual-line)
+    (define-key evil-normal-state-map "j" 'evil-next-visual-line)
+
+    ;; Paredit gives nice bindings like C-), use it
+    (sp-use-paredit-bindings)
+
     ;; This is moved to fd for spacemacs so that jk can be used for other things.
     ;; (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+
+    ;; Dark themes make the powerline hard to read.
     ;; (load-theme 'sanityinc-tomorrow-night t)
+
+    ;; Spacemacs handles font setting
     ;; (set-face-attribute 'default t :font "PragmataPro-10")
     )
 )
