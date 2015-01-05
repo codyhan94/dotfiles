@@ -1,5 +1,5 @@
 # Modified Commands
-alias ls='ls -Gp'
+alias ls='ls -hF --color=auto'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias df='df -h'
@@ -7,9 +7,9 @@ alias du='du -c -h'
 alias mkdir='mkdir -p -v'
 alias nano='nano -w'
 alias ping='ping -c 3'
-alias gcc='/usr/bin/gcc -Wall -Wstrict-prototypes -ansi -Wpedantic -g'
-alias g++='/usr/bin/g++ -Wall -g'
 alias ghc-fast='/usr/local/bin/ghc -O2 -optc-O3 -optc-ffast-math -funfolding-use-threshold=16'
+alias gcc='/usr/bin/gcc -Wall -Wstrict-prototypes -ansi -Wpedantic -Og -g'
+alias g++='/usr/bin/g++ -Wall -Og -g'
 
 # New Commands
 alias la='ls -h -al'
@@ -18,6 +18,7 @@ alias da='date "+%A, %B %d, %Y [%T]"'
 alias du1='du --max-depth=1'
 alias path='echo $PATH'
 alias x='xterm &'
+alias t='terminology &'
 alias bat='acpi -b'
 alias sysinfo='acpi -V'
 alias gotosleep='sudo systemctl suspend'
@@ -57,6 +58,3 @@ alias pacsiz="/usr/bin/pacman -Qi | egrep '^(Installed|Name)' | cut -f2 -d':' | 
 alias pacdep='for i in $(pacman -Qeq); do; echo $i "$(pactree -d 1 $i | wc -l)"; done | sort -nrk2'
 # remove all orphaned packages
 alias pacro='/usr/bin/pacman -Qtdq > /dev/null && sudo /usr/bin/pacman -Rs $(/usr/bin/pacman -Qtdq)'
-
-# sublime 3 for mac
-alias subl3='/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text'

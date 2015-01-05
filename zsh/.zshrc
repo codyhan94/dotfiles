@@ -11,9 +11,10 @@ setopt completealiases
 setopt correct_all
 
 # autocompletion
+eval `dircolors -b`
 zstyle ':completion:*' list-colors '${(s.:.)LS_COLORS}'
-zstyle ':completion:*' menu select
-zstyle :compinstall filename '/Users/cody/.zshrc'
+zstyle ':completion:*' menu select eval "$(dircolors -b)"
+zstyle :compinstall filename '/home/cody/.zshrc'
 
 # history
 HISTFILE=~/.histfile
@@ -36,7 +37,7 @@ function cur_dir_path {
     CURRENT=`dirname ${PWD}`
     if [[ $CURRENT = / ]]; then
         echo ""
-    elif [[ $CURRENT = "/Users" ]]; then
+    elif [[ $CURRENT = "/home" ]]; then
         echo ""
     else
         CURRENT=$(print -P %~)
@@ -78,18 +79,13 @@ PROMPT='
 setopt prompt_subst
 
 # command not found hook for pkgfile
-# source /usr/share/doc/pkgfile/command-not-found.zsh
+#source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # add home to path
 typeset -U path
-path=(/Developer/NVIDIA/CUDA-5.5/bin $path)
-path=(/usr/local/bin $path)
-path=(~/.cabal/bin $path)
 path=(~/bin $path)
 # append current directory to path
 path=($path .)
-path=($path /Applications/Racket\ v5.93/bin)
-path+=/usr/local/opt/llvm/bin
 # Wine binaries
 # path=(~/bin ~/bin/win32 $path)
 

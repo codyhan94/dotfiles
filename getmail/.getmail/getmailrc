@@ -1,0 +1,13 @@
+[retriever]
+type = SimplePOP3Retriever
+server = *
+port = *
+username = *
+password = *
+
+[destination]
+type = Maildir
+path = ~/mail/
+
+[options]
+read_all = False
