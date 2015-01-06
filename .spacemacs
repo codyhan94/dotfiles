@@ -133,6 +133,9 @@ This function is called at the very end of Spacemacs initialization."
     ;; This is moved to fd for spacemacs so that jk can be used for other things.
     ;; (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
+    ;; 80 character columns
+    (set-fill-column 80)
+
     ;; Dark themes make the powerline hard to read.
     ;; (load-theme 'sanityinc-tomorrow-night t)
 
