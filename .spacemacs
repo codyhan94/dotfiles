@@ -10,7 +10,7 @@
  ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
  dotspacemacs-configuration-layer-path '()
  ;; List of configuration layers to load.
- dotspacemacs-configuration-layers '(auctex cdlatex haskell)
+ dotspacemacs-configuration-layers '(auctex cdlatex haskell c-c++)
  ;; A list of packages and/or extensions that will not be install and loaded.
  dotspacemacs-excluded-packages '()
 )
@@ -90,7 +90,7 @@ This function is called at the very end of Spacemacs initialization."
           (setq beg (line-beginning-position) end (line-end-position)))
         (comment-or-uncomment-region beg end)))
 
-    (spacemacs/set-font "PragmataPro" 10)
+    (spacemacs/set-font "PragmataPro" 12)
     (key-chord-define-global ";;" 'comment-or-uncomment-region-or-line)
 
     ;; Follow symlinks without asking. Bypasses version control systems
@@ -113,7 +113,7 @@ This function is called at the very end of Spacemacs initialization."
     (define-key evil-normal-state-map "\C-u" 'evil-scroll-up)
     (define-key evil-visual-state-map "\C-u" 'evil-scroll-up)
     ;; (define-key evil-normal-state-map "\C-y" 'yank)
-    ;; (define-key evil-insert-state-map "\C-y" 'yank)
+    (define-key evil-insert-state-map "\C-y" 'yank)
     ;; (define-key evil-visual-state-map "\C-y" 'yank)
     (define-key evil-insert-state-map "\C-k" 'kill-line)
     (define-key evil-visual-state-map "\C-k" 'kill-line)
@@ -138,6 +138,9 @@ This function is called at the very end of Spacemacs initialization."
 
     ;; Dark themes make the powerline hard to read.
     ;; (load-theme 'sanityinc-tomorrow-night t)
+
+    ;; Load auctex on demand (slow!)
+    ;; (load-auctex-on-demand)
 
     ;; Spacemacs handles font setting
     ;; (set-face-attribute 'default t :font "PragmataPro-10")
