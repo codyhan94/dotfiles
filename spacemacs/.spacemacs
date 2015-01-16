@@ -142,6 +142,11 @@ This function is called at the very end of Spacemacs initialization."
     ;; Load auctex on demand (slow!)
     ;; (load-auctex-on-demand)
 
+    (setq-default c-basic-offset 4 c-default-style "linux")
+    (add-hook 'c++-mode-hook '(lambda ()
+                                  (electric-indent-mode -1)))
+    (add-hook 'c-mode-hook '(lambda ()
+                                  (electric-indent-mode -1)))
     ;; Spacemacs handles font setting
     ;; (set-face-attribute 'default t :font "PragmataPro-10")
     )
