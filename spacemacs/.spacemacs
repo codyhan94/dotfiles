@@ -91,7 +91,7 @@ This function is called at the very end of Spacemacs initialization."
         (comment-or-uncomment-region beg end)))
 
     (spacemacs/set-font "PragmataPro" 12)
-    (key-chord-define-global ";;" 'comment-or-uncomment-region-or-line)
+    ;; (key-chord-define-global ";;" 'comment-or-uncomment-region-or-line)
 
     ;; Follow symlinks without asking. Bypasses version control systems
     (setq vc-follow-symlinks t)
