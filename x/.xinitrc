@@ -49,6 +49,10 @@ xset r rate 150 40 &
 #xinput set-prop 14 260 -1
 xsetroot -cursor_name left_ptr
 
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+
 #xset +dpms
 #xset dpms 0 0 300
 xbindkeys

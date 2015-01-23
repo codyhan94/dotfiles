@@ -85,7 +85,7 @@ setopt prompt_subst
 typeset -U path
 path=(~/bin $path)
 # append current directory to path
-path=($path .)
+path=(/opt/cuda/bin $path .)
 # Wine binaries
 # path=(~/bin ~/bin/win32 $path)
 

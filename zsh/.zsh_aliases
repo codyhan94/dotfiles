@@ -46,7 +46,7 @@ alias caltechvpn='sudo openconnect -b --script ~/bin/vpnc-script --authgroup 1-T
 # Pacman
 alias pac="sudo /usr/bin/pacman -S"             # install one or more packages
 alias paca="/usr/bin/yaourt -S"                 # install package from AUR
-alias pacu="sudo /usr/bin/yaourt -Syua"          # upgrade all packages
+alias pacu="/usr/bin/yaourt -Syua"              # upgrade all packages
 alias pacau="/usr/bin/yaourt -u"                 # check AUR for upgrades
 alias pacr="sudo /usr/bin/pacman -Rs"           # uninstall one or more packages
 alias pacs="/usr/bin/pacman -Ss"                # search for a package
