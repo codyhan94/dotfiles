@@ -90,8 +90,8 @@ This function is called at the very end of Spacemacs initialization."
           (setq beg (line-beginning-position) end (line-end-position)))
         (comment-or-uncomment-region beg end)))
 
-    (spacemacs/set-font "PragmataPro" 12)
-    (key-chord-define-global ";;" 'comment-or-uncomment-region-or-line)
+    (spacemacs/set-font "PragmataPro" 10)
+    ;;(key-chord-define-global ";;" 'comment-or-uncomment-region-or-line)
 
     ;; Follow symlinks without asking. Bypasses version control systems
     (setq vc-follow-symlinks t)
@@ -157,20 +157,30 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(TeX-view-program-list
-   (quote
-    (("skim" "/Applications/Skim.app/Contents/MacOS/Skim %o"))))
- '(TeX-view-program-selection
-   (quote
-    ((output-dvi "open")
-     (output-pdf "Skim")
-     (output-html "open"))))
+ '(TeX-output-view-style (quote (("^dvi$" ("^landscape$" "^pstricks$\\|^pst-\\|^psfrag$") "%(o?)dvips -t landscape %d -o && gv %f") ("^dvi$" "^pstricks$\\|^pst-\\|^psfrag$" "%(o?)dvips %d -o && gv %f") ("^dvi$" ("^\\(?:a4\\(?:dutch\\|paper\\|wide\\)\\|sem-a4\\)$" "^landscape$") "%(o?)xdvi %dS -paper a4r -s 0 %d") ("^dvi$" "^\\(?:a4\\(?:dutch\\|paper\\|wide\\)\\|sem-a4\\)$" "%(o?)xdvi %dS -paper a4 %d") ("^dvi$" ("^\\(?:a5\\(?:comb\\|paper\\)\\)$" "^landscape$") "%(o?)xdvi %dS -paper a5r -s 0 %d") ("^dvi$" "^\\(?:a5\\(?:comb\\|paper\\)\\)$" "%(o?)xdvi %dS -paper a5 %d") ("^dvi$" "^b5paper$" "%(o?)xdvi %dS -paper b5 %d") ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us %d") ("^dvi$" "^legalpaper$" "%(o?)xdvi %dS -paper legal %d") ("^dvi$" "^executivepaper$" "%(o?)xdvi %dS -paper 7.25x10.5in %d") ("^dvi$" "." "%(o?)xdvi %dS %d") ("^pdf$" "." "sumatrapdf %o") ("^html?$" "." "netscape %o"))))
+ '(TeX-view-program-list (quote (("sumatra" "sumatrapdf %o"))))
+ '(TeX-view-program-selection (quote (((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "sumatra") (output-html "xdg-open"))))
  '(ac-ispell-requires 4)
  '(ahs-case-fold-search nil)
  '(ahs-default-range (quote ahs-range-whole-buffer))
  '(ahs-idle-interval 0.25)
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
+ '(c-basic-offset 4)
+ '(cdlatex-command-alist (quote (("bi" "Insert \\binom{}{}" "\\binom{?}{}" cdlatex-position-cursor nil nil t) ("st" "Insert \\stirling{}{}" "\\stirling{?}{}" cdlatex-position-cursor nil nil t) ("sci" "Insert \\scinot{}{}" "\\scinot{?}{}" cdlatex-position-cursor nil t t) ("unit" "Insert \\unit[]{}" "\\unit[?]{}" cdlatex-position-cursor nil t t) ("nf" "Insert \\nicefrac{}{}" "\\nicefrac{?}{}" cdlatex-position-cursor nil t t))) t)
+ '(cdlatex-math-modify-alist (quote ((116 "\\text" nil t nil nil) (98 "\\mathbf" "\\textbf" t nil nil) (99 "\\mathcal" "\\textsc" t nil nil))) t)
+ '(cdlatex-math-symbol-alist (quote ((62 ("\\geq" "\\longrightarrow" "\\max")) (60 ("\\leq" "\\longleftarrow" "\\min")) (61 ("&=" "\\equiv" "\\Longleftrightarrow")) (126 ("\\approx" "\\simeq" "\\sim")))) t)
+ '(haskell-interactive-popup-error nil)
+ '(haskell-notify-p t)
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-type (quote auto))
+ '(haskell-stylish-on-save nil)
+ '(haskell-tags-on-save t)
+ '(menu-bar-mode nil)
+ '(org-agenda-files (quote ("/tmp/orgfun.org")))
+ '(org-html-with-latex (\` imagemagick))
+ '(paradox-github-token t)
  '(ring-bell-function (quote ignore) t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
