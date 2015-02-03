@@ -97,6 +97,13 @@ This function is called at the very end of Spacemacs initialization."
                                 :powerline-scale 1.1))
     ;; (key-chord-define-global ";;" 'comment-or-uncomment-region-or-line)
 
+    ;; Trying to turn off indent mode and set fill mode/column for org mode.
+    (add-hook 'org-mode-hook (lambda ()
+                               (org-indent-mode -1)
+                               (auto-fill-mode t)
+                               (setq fill-column 80)
+                               t))
+
     ;; Follow symlinks without asking. Bypasses version control systems
     (setq vc-follow-symlinks t)
 
