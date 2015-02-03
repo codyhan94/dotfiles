@@ -22,8 +22,7 @@
  ;; allows github integration
  paradox-github-token 'c694c1f35452136f34fda8d256ceaf5718659a0a
  ;; Specify the startup banner. If the value is an integer then the
- ;; banner with the corresponding index is used, if the value is `random'
- ;; then the banner is chosen randomly among the available banners, if
+ ;; banner with the corresponding index is used, if the value is `random' ;; then the banner is chosen randomly among the available banners, if
  ;; the value is nil then no banner is displayed.
  dotspacemacs-startup-banner 'random
  ;; Default theme applied at startup
@@ -161,14 +160,14 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(TeX-view-program-list
-   (quote
-    (("skim" "/Applications/Skim.app/Contents/MacOS/Skim %o"))))
+ '(TeX-view-program-list (quote (("Zathura" "zathura %o"))))
  '(TeX-view-program-selection
    (quote
-    ((output-dvi "open")
-     (output-pdf "Skim")
-     (output-html "open"))))
+    (((output-dvi style-pstricks)
+      "dvips and gv")
+     (output-dvi "xdvi")
+     (output-pdf "Zathura")
+     (output-html "xdg-open"))))
  '(ac-ispell-requires 4)
  '(ahs-case-fold-search nil)
  '(ahs-default-range (quote ahs-range-whole-buffer))
