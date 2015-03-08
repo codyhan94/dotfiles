@@ -1,0 +1,26 @@
+[user]
+    name = Cody Han
+    email = codyhan94@gmail.com
+[credential]
+    helper = cache --timeout=3600
+[push]
+    default = simple
+[color]
+    ui = true
+[core]
+    editor = vim
+    pager = less
+    autocrlf = input
+    #askpass = qt4-ssh-askpass
+[alias]
+    branches = !legit branches
+    graft = !legit graft
+    harvest = !legit harvest
+    publish = !legit publish
+    unpublish = !legit unpublish
+    sprout = !legit sprout
+    sync = !legit sync
+    switch = !legit switch
+    resync = !legit resync
+    l = log --color --graph --stat --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    br = branch -avv
