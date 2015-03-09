@@ -11,16 +11,25 @@
     editor = vim
     pager = less
     autocrlf = input
-    #askpass = qt4-ssh-askpass
 [alias]
-    branches = !legit branches
-    graft = !legit graft
-    harvest = !legit harvest
+	switch = !legit switch \"$@\"
+	branches = !legit branches
+	sprout = !legit sprout \"$@\"
     publish = !legit publish
-    unpublish = !legit unpublish
-    sprout = !legit sprout
-    sync = !legit sync
-    switch = !legit switch
+	unpublish = !legit unpublish \"$@\"
+	harvest = !legit harvest \"$@\"
+	sync = !legit sync \"$@\"
     resync = !legit resync
+	publish = !legit publish \"$@\"
+    graft = !legit graft \"$@\"
+    st = !git status --short
     l = log --color --graph --stat --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     br = branch -avv
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
