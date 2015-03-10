@@ -57,6 +57,3 @@ alias pacsiz="/usr/bin/pacman -Qi | egrep '^(Installed|Name)' | cut -f2 -d':' | 
 alias pacdep='for i in $(pacman -Qeq); do; echo $i "$(pactree -d 1 $i | wc -l)"; done | sort -nrk2'
 # remove all orphaned packages
 alias pacro='/usr/bin/pacman -Qtdq > /dev/null && sudo /usr/bin/pacman -Rs $(/usr/bin/pacman -Qtdq)'
-
-# sublime 3 for mac
-alias subl3='/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text'
