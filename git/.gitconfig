@@ -24,3 +24,4 @@
     resync = !legit resync
     l = log --color --graph --stat --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     br = branch -avv
+    st = status -s
