@@ -158,6 +158,12 @@ This function is called at the very end of Spacemacs initialization."
                                   (electric-indent-mode -1)))
     (add-hook 'c-mode-hook '(lambda ()
                                   (electric-indent-mode -1)))
+
+    (add-hook 'LaTeX-mode-hook
+          (lambda ()
+             (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+             (setq TeX-save-query nil)
+             (setq TeX-show-compilation t)))
     ;; Spacemacs handles font setting
     ;; (set-face-attribute 'default t :font "PragmataPro-10")
     )
