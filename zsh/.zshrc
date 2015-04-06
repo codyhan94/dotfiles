@@ -72,6 +72,24 @@ function bat_level {
     fi
 }
 
+cdh_goto()
+{
+    if [ $# == 0 ]; then
+        ARG=0;
+    else
+        ARG=${1};
+    fi
+    cd `cdhist goto $ARG`
+}
+
+cdh_add()
+{
+    if [ $# != 0 ]; then
+        cdhist add $*
+    fi
+    \cd $*
+}
+
 PROMPT='
 (%{$fg_no_bold[cyan]%}%n @ %m%{$reset_color%})=(%{$fg_no_bold[cyan]%}%?%{$reset_color%})=(%{$fg_no_bold[cyan]%}%T %D%{$reset_color%})
 =($(dir_name)$(git_branch)%{$reset_color%})=(%{$fg_no_bold[yellow]%}$(ls -l | grep -v total | wc -l | sed "s: ::g") files, $(ls -lah | grep -m 1 total | sed "s/total //")%{$reset_color%})=> '

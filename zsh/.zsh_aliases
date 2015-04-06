@@ -10,6 +10,9 @@ alias ping='ping -c 3'
 alias ghc-fast='/usr/local/bin/ghc -O2 -optc-O3 -optc-ffast-math -funfolding-use-threshold=16'
 alias gcc='/usr/bin/gcc -Wall -Wstrict-prototypes -ansi -Wpedantic -Og -g'
 alias g++='/usr/bin/g++ -Wall -Og -g'
+alias cdp='cdhist print'
+alias cds='cdh_goto'
+alias cd='cdh_add'
 
 # New Commands
 alias la='ls -h -al'
@@ -42,6 +45,7 @@ alias rkupd='sudo rkhunter --propupd'
 alias rkhunt='sudo rkhunter --check --noappend-log --skip-keypress'
 alias ssh-sess='eval $(ssh-agent) && ssh-add'
 alias caltechvpn='sudo openconnect -b --script ~/bin/vpnc-script --authgroup 1-Tunnel-Caltech-Traffic-Only -u chhan https://vpn.caltech.edu'
+alias caltechvpna='sudo openconnect -b --script ~/bin/vpnc-script --authgroup 2-Tunnel-All-Traffic -u chhan https://vpn.caltech.edu'
 
 # Pacman
 alias pac="sudo /usr/bin/pacman -S"             # install one or more packages
