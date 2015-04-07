@@ -145,6 +145,18 @@ This function is called at the very end of Spacemacs initialization."
     ;; Load auctex on demand (slow!)
     ;; (load-auctex-on-demand)
 
+    (setq-default c-basic-offset 4 c-default-style "linux")
+    (add-hook 'c++-mode-hook '(lambda ()
+                                  (electric-indent-mode -1)))
+    (add-hook 'c-mode-hook '(lambda ()
+                                  (electric-indent-mode -1)))
+
+    (setq LaTeX-verbatim-environments-local `("lstlisting"))
+    (add-hook 'LaTeX-mode-hook
+          (lambda ()
+             (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+             (setq TeX-save-query nil)
+             (setq TeX-show-compilation t)))
     ;; Spacemacs handles font setting
     ;; (set-face-attribute 'default t :font "PragmataPro-10")
     )
