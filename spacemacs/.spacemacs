@@ -159,6 +159,7 @@ This function is called at the very end of Spacemacs initialization."
     (add-hook 'c-mode-hook '(lambda ()
                                   (electric-indent-mode -1)))
 
+    (setq LaTeX-verbatim-environments-local `("lstlisting"))
     (add-hook 'LaTeX-mode-hook
           (lambda ()
              (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
