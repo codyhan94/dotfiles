@@ -10,7 +10,7 @@
  ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
  dotspacemacs-configuration-layer-path '()
  ;; List of configuration layers to load.
- dotspacemacs-configuration-layers '(auctex cdlatex haskell c-c++ git)
+ dotspacemacs-configuration-layers '(auctex cdlatex haskell c-c++ git org auto-completion syntax-checking)
  ;; A list of packages and/or extensions that will not be install and loaded.
  dotspacemacs-excluded-packages '()
 )
@@ -24,7 +24,7 @@
  ;; Specify the startup banner. If the value is an integer then the
  ;; banner with the corresponding index is used, if the value is `random' ;; then the banner is chosen randomly among the available banners, if
  ;; the value is nil then no banner is displayed.
- dotspacemacs-startup-banner 'random
+ ;; dotspacemacs-startup-banner 'random
  ;; Default theme applied at startup
  dotspacemacs-default-theme 'solarized-light
  ;; The leader key
@@ -53,7 +53,7 @@
  dotspacemacs-smooth-scrolling t
  ;; If non nil pressing 'jk' in insert state, ido or helm will activate the
  ;; evil leader.
- dotspacemacs-feature-toggle-leader-on-jk t
+;; dotspacemacs-feature-toggle-leader-on-jk t
  ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
  dotspacemacs-smartparens-strict-mode nil
  ;; If non nil advises quit functions to keep server open when quitting.
