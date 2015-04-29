@@ -55,6 +55,17 @@ export XMODIFIERS=@im=fcitx
 
 #xset +dpms
 #xset dpms 0 0 300
+
+# Set up multimedia keys.
 xbindkeys
-exec xmonad
+
+# And start up XMonad!
+# exec xmonad
+# exec enlightenment_start
+exec startxfce4
+
+# Get redshift going. This causes xmonad to hang if above the exec line..
+# and doesn't work as is.
+# redshift &
+
 #exec openbox-session
