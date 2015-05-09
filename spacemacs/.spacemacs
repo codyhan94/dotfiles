@@ -10,7 +10,7 @@
  ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
  dotspacemacs-configuration-layer-path '()
  ;; List of configuration layers to load.
- dotspacemacs-configuration-layers '(auctex cdlatex haskell c-c++ git)
+ dotspacemacs-configuration-layers '(auctex cdlatex haskell c-c++ git org auto-completion syntax-checking)
  ;; A list of packages and/or extensions that will not be install and loaded.
  dotspacemacs-excluded-packages '()
 )
@@ -145,10 +145,14 @@ This function is called at the very end of Spacemacs initialization."
     ;; (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
     ;; 80 character columns
+    ;; (auto-fill-mode t)
     (set-fill-column 80)
 
     ;; Dark themes make the powerline hard to read.
     ;; (load-theme 'sanityinc-tomorrow-night t)
+
+    ;; One space after sentence ending periods!
+    (setq sentence-end-double-space nil)
 
     ;; Load auctex on demand (slow!)
     ;; (load-auctex-on-demand)
