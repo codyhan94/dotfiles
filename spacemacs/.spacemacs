@@ -27,7 +27,7 @@
  ;; the value is nil then no banner is displayed.
  dotspacemacs-startup-banner 'random
  ;; Default theme applied at startup
- dotspacemacs-default-theme 'solarized-light
+ dotspacemacs-themes '(solarized-light leuven spacemacs-dark)
  ;; The leader key
  dotspacemacs-leader-key "SPC"
  ;; Major mode leader key is a shortcut key which is the equivalent of
