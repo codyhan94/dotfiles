@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- mode: dotspacemacs -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -108,6 +108,7 @@ This function is called at the very end of Spacemacs initialization."
     (setq vc-follow-symlinks t)
 
     ;; A bunch of insert state commands so that insert mode is still emacs
+    (define-key evil-insert-state-map "\C-a" 'beginning-of-line)
     (define-key evil-insert-state-map "\C-e" 'end-of-line)
     (define-key evil-visual-state-map "\C-e" 'evil-end-of-line)
     (define-key evil-insert-state-map "\C-f" 'evil-forward-char)
