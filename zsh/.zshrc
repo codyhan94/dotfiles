@@ -90,8 +90,12 @@ path=(~/bin $path)
 path=($path .)
 path=($path /Applications/Racket\ v5.93/bin)
 path+=/usr/local/opt/llvm/bin
+path+=/Library/TeX/texbin
 # Wine binaries
 # path=(~/bin ~/bin/win32 $path)
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 gsgetpages()
 {

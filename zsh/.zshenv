@@ -11,6 +11,6 @@ export EDITOR="/usr/bin/vim"
 export XDG_CONFIG_HOME=$HOME/.config
 export CUPS_SERVER=localhost
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
 
