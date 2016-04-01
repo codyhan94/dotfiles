@@ -12,7 +12,7 @@ alias gcc='/usr/bin/gcc -Wall -Wstrict-prototypes -ansi -Wpedantic -Og -g'
 alias g++='/usr/bin/g++ -Wall -Og -g'
 alias cdp='cdhist print'
 alias cds='cdh_goto'
-alias cd='cdh_add'
+alias python=python2
 
 # New Commands
 alias la='ls -h -al'

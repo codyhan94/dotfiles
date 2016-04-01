@@ -6,6 +6,7 @@ select-word-style bash
 
 # Source our aliases!
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
+[[ -f ~/perlscripts/cdh.zsh ]] && . ~/perlscripts/cdh.zsh
 
 setopt completealiases
 setopt correct_all
@@ -70,24 +71,6 @@ function bat_level {
     else
         echo "%{$fg_no_bold[red]%}${BAT_LEVEL}%%%{$reset_color%}"
     fi
-}
-
-cdh_goto()
-{
-    if [ $# == 0 ]; then
-        ARG=0;
-    else
-        ARG=${1};
-    fi
-    cd `cdhist goto $ARG`
-}
-
-cdh_add()
-{
-    if [ $# != 0 ]; then
-        cdhist add $*
-    fi
-    \cd $*
 }
 
 PROMPT='
