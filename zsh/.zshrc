@@ -14,6 +14,8 @@ setopt correct_all
 zstyle ':completion:*' list-colors '${(s.:.)LS_COLORS}'
 zstyle ':completion:*' menu select
 zstyle :compinstall filename '/Users/cody/.zshrc'
+# zsh-completions package
+fpath=(/usr/local/share/zsh-completions $fpath)
 
 # history
 HISTFILE=~/.histfile
