@@ -82,6 +82,8 @@
                                :powerline-scale 1.1)
    dotspacemacs-line-numbers 't
    )
+
+  (setq latex-build-command "LatexMk")
   )
 
 (defun dotspacemacs/user-config ()
@@ -173,10 +175,14 @@ This function is called at the very end of Spacemacs initialization."
 
     (setq LaTeX-verbatim-environments-local `("lstlisting"))
     (add-hook 'LaTeX-mode-hook
-              (lambda ()
-                (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
-                (setq TeX-save-query nil)
-                (setq TeX-show-compilation t)))
+              (progn
+                (lambda ()
+                  (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+                  (setq TeX-save-query nil)
+                  (setq TeX-show-compilation t))
+                'turn-on-cdlatex
+                )
+              )
     ;; Spacemacs handles font setting
     ;; (set-face-attribute 'default t :font "PragmataPro-10")
     )
@@ -216,3 +222,28 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(TeX-view-program-list
+   (quote
+    (("skim" "/Applications/Skim.app/Contents/MacOS/Skim %o"))))
+ '(TeX-view-program-selection
+   (quote
+    ((output-dvi "open")
+     (output-pdf "Skim")
+     (output-html "open"))))
+ '(ac-ispell-requires 4 t)
+ '(ahs-case-fold-search nil)
+ '(ahs-default-range (quote ahs-range-whole-buffer))
+ '(ahs-idle-interval 0.25)
+ '(ahs-idle-timer 0 t)
+ '(ahs-inhibit-face-list nil)
+ '(cdlatex-math-modify-alist (quote ((99 "\\mathcal" "\\textsc" t nil nil))))
+ '(cdlatex-math-symbol-alist (quote ((70 ("\\Phi")))))
+ '(package-selected-packages
+   (quote
+    (winum fuzzy web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data cdlatex ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline powerline smeargle restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox spinner orgit org-projectile org-present org org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file neotree move-text magit-gitflow lorem-ipsum linum-relative link-hint intero info+ indent-guide ido-vertical-mode hydra hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile helm-hoogle helm-gitignore request helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag haskell-snippets google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link flycheck-pos-tip pos-tip flycheck-haskell flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight dumb-jump f s disaster diminish define-word company-statistics company-ghci company-ghc ghc haskell-mode company-cabal company-c-headers company-auctex company column-enforce-mode cmm-mode cmake-mode clean-aindent-mode clang-format bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auctex aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup quelpa package-build solarized-theme dash)))
+ '(ring-bell-function (quote ignore)))
