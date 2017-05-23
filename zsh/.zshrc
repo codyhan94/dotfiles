@@ -94,9 +94,6 @@ path+=/Library/TeX/texbin
 # Wine binaries
 # path=(~/bin ~/bin/win32 $path)
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 gsgetpages()
 {
     # @arg1 : first page of the range to extract
