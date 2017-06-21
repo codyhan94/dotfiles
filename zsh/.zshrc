@@ -7,6 +7,9 @@ select-word-style bash
 # Source our aliases!
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
 
+# allow ctrl-s to do forward search and act as opposite of ctrl-r
+stty -ixon
+
 setopt completealiases
 setopt correct_all
 
@@ -21,7 +24,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
-setopt append_history autocd extendedglob hist_ignore_all_dups
+setopt inc_append_history autocd extendedglob hist_ignore_all_dups
 unsetopt beep nomatch notify
 bindkey -e
 
