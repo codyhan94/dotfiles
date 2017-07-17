@@ -71,6 +71,29 @@ nmap <leader>w :w!<cr>
 nmap <leader>ev :e ~/.vimrc<cr>
 nmap <leader>sv :source ~/.vimrc<cr>
 
+" fast editing of .zshrc
+nmap <leader>ez :e ~/.zshrc<cr>
+
+" check out current file with p4 edit
+nmap <F7> :! p4 edit %<cr>
+
+" Map that will make the current filename with .pic.o replacing the suffix
+map <F6> :call MakePic()<CR>
+
+" This function will run make with a target created by appending pic.o to the
+" root file name of the current buffer
+function! MakePic()
+    let s:picName = expand("%:t:r") . ".pic.o"
+    let s:cmd = "make " . s:picName 
+    execute s:cmd
+endfunction
+
+" pastetoggle
+set pastetoggle=<F2>
+
+" Use F3 to ROT13 the buffer contents (and undo it if used again)
+map <F3> ggVGg?
+
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
@@ -103,7 +126,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " don't recurse too far
-let g:ctrlp_max_depth=3
+let g:ctrlp_max_depth=5
 
 " c: current file, r: nearest ancestor root (git hg svn bzr), a: c if cwd is not
 " a direct ancestor of current file's directory, w: cwd
@@ -129,12 +152,25 @@ let g:ctrlp_show_hidden=0
 " => minibufexplorer customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" only open when we want to check buffers
+let g:miniBufExplorerAutoStart=0
+
 " toggle MBE and switch tabs relative to it
 nnoremap <S-Tab> :MBEToggle<cr>
-noremap <C-Tab> :MBEbn<cr>
-noremap <C-S-Tab> :MBEbp<cr>
+" use ctrlp for buffer fuzzy switching or just :b [..]<tab>
+"noremap <C-Tab> :MBEbn<cr>
+"noremap <C-S-Tab> :MBEbp<cr>
 "noremap <C-Tab> :MBEbn<cr>:MBEOpen!<cr>
 "noremap <C-S-Tab> :MBEbp<cr>:MBEOpen!<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => rainbow parens customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" turn off by default but set up shortcut to toggle
+let g:rainbow_active=0
+nnoremap <silent> <leader>r :RainbowToggle<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -231,16 +267,18 @@ endif
 " endtry
 
 set t_Co=256
-set background=light
-let g:solarized_termcolors=256
-colorscheme solarized
 
 " Set extra options when running in GUI mode
 if has("gui_running")
     set guioptions-=T
+    set guioptions-=m
     set guioptions-=e
-    set t_Co=256
     set guitablabel=%M\ %t
+    colorscheme base16-tomorrow-night
+else
+    set background=light
+    let g:solarized_termcolors=256
+    colorscheme solarized
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -306,6 +344,12 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+" Convenient way to move between tabs, mirrors iTerm and ST3
+nmap <C-Left> gT
+nmap <C-Right> gt
+noremap <C-Tab> gt
+noremap <C-S-Tab> gT
+
 " Close the current buffer (slight modification to avoid closing tab)
 "map <leader>bd :Bclose<cr>:tabclose<cr>gT
 map <leader>bd :Bclose<cr>
@@ -338,7 +382,9 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers 
 try
-  set switchbuf=useopen,usetab,newtab
+  "set switchbuf=useopen,usetab,newtab
+  " disable usetab so that we can have MBE per tab space properly
+  set switchbuf=useopen
   set stal=2
 catch
 endtry

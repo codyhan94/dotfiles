@@ -1,2 +1,2 @@
-set lines=40 columns=85
+set lines=999 columns=999
 
