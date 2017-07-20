@@ -142,10 +142,23 @@ let g:ctrlp_custom_ignore = {
 " Show hidden files (or not)
 let g:ctrlp_show_hidden=0
 
+" only jump to windows in the current tab when switching buffers (if 'e'). use
+" ctrl-t to open a buffer in a new tab.
+let g:ctrlp_switch_buffer = 't'
+
 " open in buffer mode (maybe something else?) [doesn't work because it overrides
 " ctrl-p. just change it to buffer mode manually for now while we think of a
 " better keybinding]
 " noremap <C-S-p> :CtrlPBuffer<cr>
+
+" Follow symlinks but ignore looped internal symlinks to avoid duplicates
+let g:ctrlp_follow_symlinks=1
+
+" unlimited number of files
+let g:ctrlp_max_files=0
+
+" include current file in match entries
+let g:ctrlp_match_current_file = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -171,6 +184,18 @@ nnoremap <S-Tab> :MBEToggle<cr>
 " turn off by default but set up shortcut to toggle
 let g:rainbow_active=0
 nnoremap <silent> <leader>r :RainbowToggle<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => multiple cursors customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Make it more like sublime text (maybe)
+"let g:multi_cursor_next_key='<C-n>'
+"let g:multi_cursor_prev_key='<C-p>'
+"let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<C-c>'
+nnoremap <silent> <C-c> :call multiple_cursors#quit()<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -266,7 +291,7 @@ endif
 " catch
 " endtry
 
-set t_Co=256
+"set t_Co=256
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -277,7 +302,8 @@ if has("gui_running")
     colorscheme base16-tomorrow-night
 else
     set background=light
-    let g:solarized_termcolors=256
+    "let g:solarized_termcolors=256
+    "colorscheme solarized
     colorscheme solarized
 endif
 
@@ -332,10 +358,11 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
+"map <space> /
+"map <c-space> ?
 
-" Disable highlight when <leader><cr> is pressed
+" Disable highlight when <leader><space> or <leader><cr> is pressed
+map <silent> <leader><space> :noh<cr>
 map <silent> <leader><cr> :noh<cr>
 
 " Smart way to move between windows
@@ -410,19 +437,19 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 set number
 
 " Remap VIM 0 to first non-blank character
-map 0 ^
+"nmap 0 ^
 
 " Remap H, L to beginning and end of line
 nnoremap H ^
 nnoremap L $
-vnoremap H ^
-vnoremap L $
+xmap H ^
+xmap L $
 
 " Map j and k to move up and down by visual lines
 nmap j gj
 nmap k gk
-vmap j gj
-vmap k gk
+xmap j gj
+xmap k gk
 
 " Map fd to exit insert mode
 inoremap fd <esc>
