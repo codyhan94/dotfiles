@@ -102,7 +102,6 @@ command W w !sudo tee % > /dev/null
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => NERDTree customizations
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " toggle NERDTree with ,f and open it at current file with ,v
 nnoremap <Leader>f :NERDTreeToggle<cr>
 nnoremap <silent> <Leader>v :NERDTreeFind<cr>
@@ -124,7 +123,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ctrlp customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " don't recurse too far
 let g:ctrlp_max_depth=5
 
@@ -164,7 +162,6 @@ let g:ctrlp_match_current_file = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => minibufexplorer customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " only open when we want to check buffers
 let g:miniBufExplorerAutoStart=0
 
@@ -180,7 +177,6 @@ nnoremap <S-Tab> :MBEToggle<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => rainbow parens customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " turn off by default but set up shortcut to toggle
 let g:rainbow_active=0
 nnoremap <silent> <leader>r :RainbowToggle<cr>
@@ -189,7 +185,6 @@ nnoremap <silent> <leader>r :RainbowToggle<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => multiple cursors customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Make it more like sublime text (maybe)
 "let g:multi_cursor_next_key='<C-n>'
 "let g:multi_cursor_prev_key='<C-p>'
@@ -197,6 +192,13 @@ nnoremap <silent> <leader>r :RainbowToggle<cr>
 let g:multi_cursor_quit_key='<C-c>'
 nnoremap <silent> <C-c> :call multiple_cursors#quit()<CR>
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => delimitMate customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Better behavior when typing '{<cr>' or '{<space>'
+let g:delimitMate_expand_space=1
+let g:delimitMate_expand_cr=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
