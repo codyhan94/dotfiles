@@ -199,6 +199,8 @@ nnoremap <silent> <C-c> :call multiple_cursors#quit()<CR>
 " Better behavior when typing '{<cr>' or '{<space>'
 let g:delimitMate_expand_space=1
 let g:delimitMate_expand_cr=1
+let g:delimitMate_jump_expansion=1
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
