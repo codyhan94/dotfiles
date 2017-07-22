@@ -348,6 +348,9 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+" Format numbered lists correctly both automatically and with gw/gq
+set formatoptions+=n
+
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
