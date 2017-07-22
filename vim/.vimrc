@@ -138,6 +138,18 @@ noremap <C-S-Tab> :MBEbp<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => asynchronous lint engine customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" cpp options
+let g:ale_linters = {
+            \ 'cpp': ['g++'],
+            \ 'c': ['gcc']
+            \ }
+"let g:ale_cpp_gcc_executable='g++'
+let g:ale_cpp_gcc_options='-std=c++98 -Wall -Wextra'
+let g:ale_c_gcc_options='-std=c99 -Wall -Wextra'
+
+
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set 7 lines to the cursor - when moving vertically using j/k
