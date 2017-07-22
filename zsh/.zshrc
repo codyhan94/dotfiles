@@ -99,7 +99,11 @@ zstyle ':chpwd:*' recent-dirs-insert both
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
 
 # our custom functions
-fpath=(~/dotfiles/zsh/.zfunctions $fpath)
+fpath=(
+    ~/dotfiles/zsh/.zfunctions
+    /usr/local/share/zsh-completions
+    $fpath
+)
 autoload -U promptinit; promptinit
 prompt pure
 
