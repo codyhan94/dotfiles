@@ -317,13 +317,11 @@ if has("gui_running")
     set guioptions-=e
     set guitablabel=%M\ %t
     colorscheme base16-tomorrow-night
-    let g:airline_theme='tomorrow'
 else
     set background=light
     "let g:solarized_termcolors=256
     "colorscheme solarized
     colorscheme solarized
-    let g:airline_theme='solarized'
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
