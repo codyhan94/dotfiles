@@ -60,7 +60,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-completions)
+plugins=()
 
 source $ZSH/oh-my-zsh.sh
 
@@ -111,8 +111,8 @@ zstyle ':chpwd:*' recent-dirs-insert both
 # our custom functions
 fpath=(
     ~/dotfiles/zsh/.zfunctions
-    # using zsh-completions as a omz plugin now
-    #~/.zsh/zsh-completions/src
+    # can't use using zsh-completions as omz plugin so do this
+    ~/.zsh/zsh-completions/src
     $fpath
 )
 autoload -U promptinit; promptinit
