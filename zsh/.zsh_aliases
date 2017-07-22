@@ -8,11 +8,11 @@ alias mkdir='mkdir -p -v'
 alias nano='nano -w'
 alias ping='ping -c 3'
 alias ghc-fast='/usr/local/bin/ghc -O2 -optc-O3 -optc-ffast-math -funfolding-use-threshold=16'
-alias gcc='/usr/bin/gcc -Wall -Wstrict-prototypes -ansi -Wpedantic -Og -g'
-alias g++='/usr/bin/g++ -Wall -Og -g'
-alias cdp='cdhist print'
-alias cds='cdh_goto'
-alias python=python2
+# alias gcc='/usr/bin/gcc -Wall -Wstrict-prototypes -ansi -Wpedantic -Og -g'
+# alias g++='/usr/bin/g++ -Wall -Og -g'
+alias cdp='cd -l'
+alias cds='cd -1'
+# alias python=python2
 
 # New Commands
 alias la='ls -h -al'
@@ -62,3 +62,28 @@ alias pacsiz="/usr/bin/pacman -Qi | egrep '^(Installed|Name)' | cut -f2 -d':' | 
 alias pacdep='for i in $(pacman -Qeq); do; echo $i "$(pactree -d 1 $i | wc -l)"; done | sort -nrk2'
 # remove all orphaned packages
 alias pacro='/usr/bin/pacman -Qtdq > /dev/null && sudo /usr/bin/pacman -Rs $(/usr/bin/pacman -Qtdq)'
+
+# environment setup
+###############################################################################
+# alias setrun_617_ISR="export BLDTYPE='IC6.1.7/ISR'; source ~/local/bin/scripts/set_run_environment"
+# alias setrun_616_ISR12="export BLDTYPE='IC6.1.6/ISR12'; source ~/local/bin/scripts/set_run_environment"
+# alias setrun_616_ISR13="export BLDTYPE='IC6.1.6/ISR13'; source ~/local/bin/scripts/set_run_environment"
+# alias setrun_616_ISR14="export BLDTYPE='IC6.1.6/ISR14'; source ~/local/bin/scripts/set_run_environment"
+
+alias setrun_617_EAV="export BLDTYPE=IC6.1.7/EAV; source  ~/bin/set_run_environment"
+alias setrun_main="export BLDTYPE='IC6.1.7/main'; source ~/bin/set_run_environment"
+alias setrun_adv="export BLDTYPE='ICADV12.3/main'; source ~/bin/set_run_environment"
+
+
+# alias setrun_617_ISR6="export BLDTYPE='IC6.1.7/ISR6'; source ~/local/bin/scripts/set_run_environment"
+alias setrun_617_ISR7="export BLDTYPE='IC6.1.7/ISR7'; source ~/bin/set_run_environment"
+alias setrun_617_ISR8="export BLDTYPE='IC6.1.7/ISR8'; source ~/bin/set_run_environment"
+alias setrun_617_ISR9="export BLDTYPE='IC6.1.7/ISR9'; source ~/bin/set_run_environment"
+alias setrun_617_ISR10="export BLDTYPE='IC6.1.7/ISR10'; source ~/bin/set_run_environment"
+alias setrun_617_ISR11="export BLDTYPE='IC6.1.7/ISR11'; source ~/bin/set_run_environment"
+alias setrun_617_ISR12="export BLDTYPE='IC6.1.7/ISR12'; source ~/bin/set_run_environment"
+alias setrun_617_ISR13="export BLDTYPE='IC6.1.7/ISR13'; source ~/bin/set_run_environment"
+
+alias setbld_I617_EAV='export viva_target=617EAV; source ~/bin/set_bld_environment'
+alias setbld_IC617_main='export viva_target=617Main; source ~/bin/set_bld_environment'
+

@@ -1,110 +1,126 @@
-autoload -U colors compinit promptinit select-word-style
-colors
-compinit
-promptinit
-select-word-style bash
+# this is where profiling starts
+PROFILE_STARTUP=false
+if [[ "$PROFILE_STARTUP" = true ]]; then
+    # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+    PS4=$'%D{%M%S%.} %N:%i> '
+    exec 3>&2 2>$HOME/tmp/startlog.$$
+    setopt xtrace prompt_subst
+fi
 
-# Source our aliases!
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/dotfiles/zsh/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME=""
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=()
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+export MANPATH="~/share/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Source our aliases and scripts
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
-[[ -f ~/perlscripts/cdh.zsh ]] && . ~/perlscripts/cdh.zsh
+#[[ -f ~/perlscripts/cdh.zsh ]] && . ~/perlscripts/cdh.zsh
+[[ -f ~/etc/cdhist.bashrc ]] && . ~/etc/cdhist.bashrc
 
-setopt completealiases
-setopt correct_all
+# gvim client/server
+gvim () { command gvim --remote-tab-silent "$@" || command gvim "$@"; }
 
-# autocompletion
-eval `dircolors -b`
-zstyle ':completion:*' list-colors '${(s.:.)LS_COLORS}'
-zstyle ':completion:*' menu select eval "$(dircolors -b)"
-zstyle :compinstall filename '/home/cody/.zshrc'
+# cdr for cd history "cd-recent"
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':chpwd:*' recent-dirs-max 30
+zstyle ':chpwd:*' recent-dirs-default true
+zstyle ':chpwd:*' recent-dirs-insert both
 
-# history
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
-setopt append_history autocd extendedglob hist_ignore_all_dups
-unsetopt beep nomatch notify
-bindkey -e
+# our custom functions
+fpath=(~/dotfiles/zsh/.zfunctions $fpath)
+autoload -U promptinit; promptinit
+prompt pure
 
-[[ -n "${key[PageUp]}"   ]] && bindkey "${key[PageUp]}"  history-beginning-search-backward
-[[ -n "${key[PageDown]}" ]] && bindkey "${key[PageDown]}"  history-beginning-search-forward
+# some specific preferences
+unsetopt beep
+setopt hist_ignore_all_dups
 
-# Something from online - type a few characters and press up and down to
-# search history - pretty useful. Imported from .bashrc
-bindkey "\e[A" history-search-backward
-bindkey "\e[B" history-search-forward
 
-# custom prompt
-function cur_dir_path {
-    CURRENT=`dirname ${PWD}`
-    if [[ $CURRENT = / ]]; then
-        echo ""
-    elif [[ $CURRENT = "/home" ]]; then
-        echo ""
-    else
-        CURRENT=$(print -P %~)
-        echo "${CURRENT%/*}/"
-    fi
-}
-function dir_name {
-    echo "%{$fg_no_bold[yellow]%}$(cur_dir_path)%{$fg_no_bold[magenta]%}%1~%{$reset_color%}"
-}
-function git_stat {
-    GIT_STATUS=$(git status 2>/dev/null | grep -i "nothing to commit")
-    if [ -z ${GIT_STATUS} ]; then
-        echo " %{$fg_no_bold[yellow]!!"
-    fi
-}
-function git_branch {
-    GIT_BRANCH=$(git branch 2>/dev/null | grep \* | awk '{ print $2 }')
-    if [ ${GIT_BRANCH} ]; then
-        echo " %{$fg_no_bold[yellow]%}on %{$fg_no_bold[magenta]%}${GIT_BRANCH}$(git_stat)%{$reset_color%}"
-    fi
-}
-function bat_level {
-    BAT_LEVEL=$(acpi -b | cut -f4 -d' ' | sed -e 's/%//' -e 's/,//')
-    if [[ $BAT_LEVEL -gt 90 ]]; then
-        echo "%{$fg_no_bold[green]%}${BAT_LEVEL}%%%{$reset_color%}"
-    elif [[ $BAT_LEVEL -gt 50 ]]; then
-        echo "%{$fg_no_bold[cyan]%}${BAT_LEVEL}%%%{$reset_color%}"
-    elif [[ $BAT_LEVEL -gt 15 ]]; then
-        echo "%{$fg_no_bold[yellow]%}${BAT_LEVEL}%%%{$reset_color%}"
-    else
-        echo "%{$fg_no_bold[red]%}${BAT_LEVEL}%%%{$reset_color%}"
-    fi
-}
+# Entirety of my startup file... then
+if [[ "$PROFILE_STARTUP" = true ]]; then
+    unsetopt xtrace
+    exec 2>&3 3>&-
+fi
 
-PROMPT='
-(%{$fg_no_bold[cyan]%}%n @ %m%{$reset_color%})=(%{$fg_no_bold[cyan]%}%?%{$reset_color%})=(%{$fg_no_bold[cyan]%}%T %D%{$reset_color%})
-=($(dir_name)$(git_branch)%{$reset_color%})=(%{$fg_no_bold[yellow]%}$(ls -l | grep -v total | wc -l | sed "s: ::g") files, $(ls -lah | grep -m 1 total | sed "s/total //")%{$reset_color%})=> '
-
-setopt prompt_subst
-
-# command not found hook for pkgfile
-#source /usr/share/doc/pkgfile/command-not-found.zsh
-
-# add home to path
-typeset -U path
-path=(~/bin $path)
-# append current directory to path
-path=(/opt/cuda/bin $path .)
-# Wine binaries
-# path=(~/bin ~/bin/win32 $path)
-
-gsgetpages()
-{
-    # @arg1 : first page of the range to extract
-    # @arg2 : last page of the range to extract
-    # @arg3 : input file
-    gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=${1} -dLastPage=${2} -sOutputFile=temp.pdf ${3}
-}
-
-origin-clone()
-{
-    # @arg1 : the repo to clone
-    git clone bkubisiak@69.69.108.139:/opt/git/${1}
-}
-
-encrypt()
-{
-    gpg -c ${1} && rm ${1}
-}
