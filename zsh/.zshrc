@@ -1,8 +1,16 @@
+# set up base16-colors
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
 autoload -U colors compinit promptinit select-word-style
 colors
 compinit
 promptinit
 select-word-style bash
+
+# cdr for cd history "cd-recent"
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
 
 # Source our aliases!
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
@@ -84,20 +92,6 @@ setopt prompt_subst
 
 # command not found hook for pkgfile
 # source /usr/share/doc/pkgfile/command-not-found.zsh
-
-# add home to path
-typeset -U path
-path=(/Developer/NVIDIA/CUDA-5.5/bin $path)
-path=(/usr/local/bin $path)
-path=(~/.cabal/bin $path)
-path=(~/bin $path)
-# append current directory to path
-path=($path .)
-path=($path /Applications/Racket\ v5.93/bin)
-path+=/usr/local/opt/llvm/bin
-path+=/Library/TeX/texbin
-# Wine binaries
-# path=(~/bin ~/bin/win32 $path)
 
 gsgetpages()
 {
