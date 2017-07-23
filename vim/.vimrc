@@ -71,6 +71,15 @@ nmap <leader>w :w!<cr>
 nmap <leader>ev :e ~/.vimrc<cr>
 nmap <leader>sv :source ~/.vimrc<cr>
 
+" fast editing of .zshrc
+nmap <leader>ez :e ~/.zshrc<cr>
+
+" pastetoggle
+set pastetoggle=<F2>
+
+" Use F3 to ROT13 the buffer contents (and undo it if used again)
+map <F3> ggVGg?
+
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
@@ -103,7 +112,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " don't recurse too far
-let g:ctrlp_max_depth=3
+let g:ctrlp_max_depth=5
 
 " c: current file, r: nearest ancestor root (git hg svn bzr), a: c if cwd is not
 " a direct ancestor of current file's directory, w: cwd
@@ -124,17 +133,48 @@ let g:ctrlp_show_hidden=0
 " better keybinding]
 " noremap <C-S-p> :CtrlPBuffer<cr>
 
+" Follow symlinks but ignore looped internal symlinks to avoid duplicates
+let g:ctrlp_follow_symlinks=1
+
+" unlimited number of files
+let g:ctrlp_max_files=0
+
+" include current file in match entries
+let g:ctrlp_match_current_file = 1
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => minibufexplorer customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" only open when we want to check buffers
+let g:miniBufExplorerAutoStart=0
 
 " toggle MBE and switch tabs relative to it
 nnoremap <S-Tab> :MBEToggle<cr>
-noremap <C-Tab> :MBEbn<cr>
-noremap <C-S-Tab> :MBEbp<cr>
+"noremap <C-Tab> :MBEbn<cr>
+"noremap <C-S-Tab> :MBEbp<cr>
 "noremap <C-Tab> :MBEbn<cr>:MBEOpen!<cr>
 "noremap <C-S-Tab> :MBEbp<cr>:MBEOpen!<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => multiple cursors customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Make it more like sublime text (maybe)
+"let g:multi_cursor_next_key='<C-n>'
+"let g:multi_cursor_prev_key='<C-p>'
+"let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<C-c>'
+nnoremap <silent> <C-c> :call multiple_cursors#quit()<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => delimitMate customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Better behavior when typing '{<cr>' or '{<space>'
+let g:delimitMate_expand_space=1
+let g:delimitMate_expand_cr=1
+let g:delimitMate_jump_expansion=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -148,6 +188,54 @@ let g:ale_linters = {
 "let g:ale_cpp_gcc_executable='g++'
 let g:ale_cpp_gcc_options='-std=c++98 -Wall -Wextra'
 let g:ale_c_gcc_options='-std=c99 -Wall -Wextra'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => YouCompleteMe customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" something sane to use as a default
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
+" close completion preview after accepting completion
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+" find completions when 'using namespace std'
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_semantic_triggers =  {
+  \   'c' : ['->', '.','re![_a-zA-z0-9]'],
+  \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+  \             're!\[.*\]\s'],
+  \   'ocaml' : ['.', '#'],
+  \   'cpp,objcpp' : ['->', '.', '::','re![_a-zA-Z0-9]'],
+  \   'perl' : ['->'],
+  \   'php' : ['->', '::'],
+  \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+  \   'ruby' : ['.', '::'],
+  \   'lua' : ['.', ':'],
+  \   'erlang' : [':'],
+  \ }
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ultisnips customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Make ultisnips play nice with YCM
+" see https://github.com/Valloric/YouCompleteMe/issues/36#issuecomment-15451411
+" for more ideas
+
+let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+
+"let g:UltiSnipsExpandTrigger = '<C-j>'
+"let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+"let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+
+" Prevent ultisnips from losing its place after YCM completion
+set completeopt-=preview
 
 
 " => VIM user interface
@@ -301,6 +389,9 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+" Format numbered lists correctly both automatically and with gw/gq
+set formatoptions+=n
+
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -315,10 +406,11 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
+"map <space> /
+"map <c-space> ?
 
-" Disable highlight when <leader><cr> is pressed
+" Disable highlight when <leader><space> or <leader><cr> is pressed
+map <silent> <leader><space> :noh<cr>
 map <silent> <leader><cr> :noh<cr>
 
 " Smart way to move between windows
@@ -326,6 +418,10 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" Convenient way to move between tabs, mirrors iTerm and ST3
+noremap <C-Tab> gt
+noremap <C-S-Tab> gT
 
 " Close the current buffer (slight modification to avoid closing tab)
 "map <leader>bd :Bclose<cr>:tabclose<cr>gT
@@ -359,7 +455,7 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers 
 try
-  set switchbuf=useopen,usetab,newtab
+  set switchbuf=useopen
   set stal=2
 catch
 endtry
@@ -385,19 +481,19 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 set number
 
 " Remap VIM 0 to first non-blank character
-map 0 ^
+"nmap 0 ^
 
 " Remap H, L to beginning and end of line
 nnoremap H ^
 nnoremap L $
-vnoremap H ^
-vnoremap L $
+xmap H ^
+xmap L $
 
 " Map j and k to move up and down by visual lines
 nmap j gj
 nmap k gk
-vmap j gj
-vmap k gk
+xmap j gj
+xmap k gk
 
 " Map fd to exit insert mode
 inoremap fd <esc>
