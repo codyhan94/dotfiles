@@ -98,14 +98,31 @@ zstyle ':chpwd:*' recent-dirs-insert both
 # source our own aliases
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
 
-# our custom functions
+# fpath setup
 fpath=(
+    # for stuff like pure
     ~/dotfiles/zsh/.zfunctions
+    # installed manually at the moment
     /usr/local/share/zsh-completions
     $fpath
 )
+
+# load Pure prompt
 autoload -U promptinit; promptinit
 prompt pure
+
+# path setup
+typeset -U path
+path=(
+    ~/bin
+    ~/.cabal/bin
+    /usr/local/bin
+    /Developer/NVIDIA/CUDA-5.5/bin
+    /usr/local/opt/llvm/bin
+    /Library/TeX/texbin
+    $path
+    .
+)
 
 # some specific preferences
 unsetopt beep
