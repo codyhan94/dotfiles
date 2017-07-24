@@ -1,4 +1,7 @@
-# this is where profiling starts
+# simple profiling, uncomment to enable
+#zmodload zsh/zprof
+
+# more in depth profiler
 PROFILE_STARTUP=false
 if [[ "$PROFILE_STARTUP" = true ]]; then
     # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
@@ -13,10 +16,21 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/dotfiles/zsh/.oh-my-zsh
 
+# our custom functions
+fpath=(
+    ~/dotfiles/zsh/.zfunctions
+    # can't use using zsh-completions as omz plugin so do this
+    ~/.zsh/zsh-completions/src
+    $fpath
+)
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME=""
+
+# disable calling compaudit to speed up load times
+ZSH_DISABLE_COMPFIX="true"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -108,13 +122,7 @@ zstyle ':chpwd:*' recent-dirs-max 30
 zstyle ':chpwd:*' recent-dirs-default true
 zstyle ':chpwd:*' recent-dirs-insert both
 
-# our custom functions
-fpath=(
-    ~/dotfiles/zsh/.zfunctions
-    # can't use using zsh-completions as omz plugin so do this
-    ~/.zsh/zsh-completions/src
-    $fpath
-)
+# for pure prompt
 autoload -U promptinit; promptinit
 prompt pure
 
@@ -122,10 +130,34 @@ prompt pure
 unsetopt beep
 setopt hist_ignore_all_dups
 
+# don't duplicate anything in path
+typeset -U path
+path=(
+    # make sure our own local bin is at the front of path
+    ~/bin
+    # 6.1.7 ddtool and designer
+    #/home/codyh/p4builds/617Main/tools/Qt/64bit/bin
+    #/home/codyh/p4builds/617Main/tools/dfII/pvt/bin
+    # for ecbuild
+    # /eng/tools/cic/cm/bin/
+    # put before emacs so we use exuberant tags instead of emacs ctags
+    /grid/common/pkgs/ctags/latest/bin
+    /grid/common/pkgs/emacs/v25.1/bin
+    /grid/common/pkgs/htop/latest/bin
+    /grid/common/pkgs/python/v3.6.1/bin
+    /grid/common/pkgs/vim/v8.0/bin
+    /grid/common/pkgs/git/v2.8.3/bin
+    /grid/common/pkgs/perforce/latest/bin/
+    /grid/common/pkgs/ccrtools/
+    /grid/common/bin 
+    $path
+)
+
 
 # Entirety of my startup file... then
 if [[ "$PROFILE_STARTUP" = true ]]; then
     unsetopt xtrace
     exec 2>&3 3>&-
 fi
+#zprof
 

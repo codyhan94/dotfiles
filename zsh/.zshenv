@@ -19,27 +19,6 @@ export P4MERGE=p4merge
 # > PATH MODIFICATIONS
 ###############################################################################
 
-# don't duplicate anything in path
-typeset -U path
-path=(
-    # make sure our own local bin is at the front of path
-    ~/bin
-    # 6.1.7 ddtool and designer
-    #/home/codyh/p4builds/617Main/tools/Qt/64bit/bin
-    #/home/codyh/p4builds/617Main/tools/dfII/pvt/bin
-    # for ecbuild
-    # /eng/tools/cic/cm/bin/
-    /grid/common/pkgs/emacs/v25.1/bin
-    /grid/common/pkgs/htop/latest/bin
-    /grid/common/pkgs/python/v3.6.1/bin
-    /grid/common/pkgs/vim/v8.0/bin
-    /grid/common/pkgs/git/v2.8.3/bin
-    /grid/common/pkgs/perforce/latest/bin/
-    /grid/common/pkgs/ccrtools/
-    /grid/common/bin 
-    $path
-)
-
 export EDITOR="vim"
 export XDG_CONFIG_HOME=$HOME/.config
 export CUPS_SERVER=localhost
