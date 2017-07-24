@@ -223,14 +223,13 @@ let g:ycm_semantic_triggers =  {
 " see https://github.com/Valloric/YouCompleteMe/issues/36#issuecomment-15451411
 " for more ideas
 
+" disable <tab> for YCM
 let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
 
-let g:UltiSnipsExpandTrigger="<Tab>"
-let g:UltiSnipsJumpForwardTrigger="<Tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
-
-"let g:UltiSnipsExpandTrigger = '<C-j>'
+" These are default values for ultisnips
+"let g:UltiSnipsExpandTrigger = '<tab>'
+"let g:UltiSnipsListSnippets = '<c-tab>'
 "let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 "let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
