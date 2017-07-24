@@ -74,3 +74,11 @@
 	path = vim/.vim/bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips
     ignore = dirty
+[submodule "vim/.vim/bundle/ctrlp_bdelete.vim"]
+	path = vim/.vim/bundle/ctrlp_bdelete.vim
+	url = https://github.com/d11wtq/ctrlp_bdelete.vim
+    ignore = dirty
+[submodule "vim/.vim/bundle/tagbar"]
+	path = vim/.vim/bundle/tagbar
+	url = https://github.com/majutsushi/tagbar
+    ignore = dirty

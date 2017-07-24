@@ -130,12 +130,26 @@ let g:ctrlp_max_depth=5
 " a direct ancestor of current file's directory, w: cwd
 let g:ctrlp_working_path_mode='wa'
 
+" experimental async (only with ctrlp_user_command set though)
+" disable for now because it's a bit buggy
+"let g:ctrlp_user_command_async=1
+
+" Optimize file searching
+if executable('ag')
+    " Use ag to list files
+    let g:ctrlp_user_command =
+                \ 'ag %s --files-with-matches --follow -g "" --nocolor --ignore "\.git$\|\.hg$\|\.svn$"'
+endif
+
 " Sane Ignore For ctrlp from
 " https://gist.github.com/leehambley/67de417c5c38f0ff8093
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
   \ 'file': '\.exe$\|\.so$\|\.dat$'
   \ }
+
+" Add mapping for buffer search
+nnoremap <silent> <leader>b :CtrlPBuffer<cr>
 
 " Show hidden files (or not)
 let g:ctrlp_show_hidden=0
@@ -150,13 +164,16 @@ let g:ctrlp_switch_buffer = 't'
 " noremap <C-S-p> :CtrlPBuffer<cr>
 
 " Follow symlinks but ignore looped internal symlinks to avoid duplicates
-let g:ctrlp_follow_symlinks=1
+let g:ctrlp_follow_symlinks = 1
 
 " unlimited number of files
-let g:ctrlp_max_files=0
+let g:ctrlp_max_files = 0
 
 " include current file in match entries
 let g:ctrlp_match_current_file = 1
+
+" set up buffer deletion from within ctrlp
+call ctrlp_bdelete#init()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -213,6 +230,17 @@ let g:ale_linters = {
 "let g:ale_cpp_gcc_executable='g++'
 let g:ale_cpp_gcc_options='-std=c++98 -Wall -Wextra'
 let g:ale_c_gcc_options='-std=c99 -Wall -Wextra'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => tagbar customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" open and close the tag bar
+nmap <F8> :TagbarToggle<cr>
+
+" autofocus and autoclose the tag bar
+let g:tagbar_autoclose = 1
+let g:tagbar_autofocus = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
