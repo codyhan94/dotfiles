@@ -151,6 +151,9 @@ let g:ctrlp_custom_ignore = {
 " Add mapping for buffer search
 nnoremap <silent> <leader>b :CtrlPBuffer<cr>
 
+" Add mapping for MRU file search
+nnoremap <silent> <leader>m :CtrlPMRUFiles<cr>
+
 " Show hidden files (or not)
 let g:ctrlp_show_hidden=0
 
@@ -236,11 +239,21 @@ let g:ale_c_gcc_options='-std=c99 -Wall -Wextra'
 " => tagbar customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " open and close the tag bar
-nmap <F8> :TagbarToggle<cr>
+nmap <silent> <leader>t :TagbarToggle<cr>
 
 " autofocus and autoclose the tag bar
 let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => cindent options
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" place case labels at the same indent level as the switch statement
+set cinoptions+=:0
+
+" place c++ scope declarations at the same level as their scope
+set cinoptions+=g0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -546,7 +559,7 @@ map <leader>s? z=
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+"noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Quickly open a buffer for scribble
 map <leader>q :e ~/buffer<cr>
