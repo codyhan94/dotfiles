@@ -129,6 +129,8 @@ prompt pure
 # some specific preferences
 unsetopt beep
 setopt hist_ignore_all_dups
+# https://github.com/robbyrussell/oh-my-zsh/issues/449
+unsetopt nomatch
 
 # don't duplicate anything in path
 typeset -U path
