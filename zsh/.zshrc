@@ -169,6 +169,7 @@ path=(
 export DEFAULT_PATH=$PATH
 export DEFAULT_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
+
 # Entirety of my startup file... then
 if [[ "$PROFILE_STARTUP" = true ]]; then
     unsetopt xtrace
