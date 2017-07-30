@@ -359,10 +359,12 @@ if has("gui_running")
     set guitablabel=%M\ %t
     colorscheme base16-tomorrow-night
 else
-    set background=light
-    "let g:solarized_termcolors=256
-    "colorscheme solarized
-    colorscheme solarized
+    if (filereadable(expand("~/.vimrc_background")))
+        " necessary to make sure nothing breaks in xfce terminal
+        set bg=dark
+        let base16colorspace=256
+        source ~/.vimrc_background
+    endif
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -602,3 +604,4 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
+
