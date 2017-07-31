@@ -137,22 +137,9 @@ typeset -U path
 path=(
     # make sure our own local bin is at the front of path
     ~/bin
-    # 6.1.7 ddtool and designer
-    #/home/codyh/p4builds/617Main/tools/Qt/64bit/bin
-    #/home/codyh/p4builds/617Main/tools/dfII/pvt/bin
-    # for ecbuild
-    # /eng/tools/cic/cm/bin/
-    # put before emacs so we use exuberant tags instead of emacs ctags
-    /grid/common/pkgs/ctags/latest/bin
-    /grid/common/pkgs/emacs/v25.1/bin
-    /grid/common/pkgs/htop/latest/bin
-    /grid/common/pkgs/python/v3.6.1/bin
-    /grid/common/pkgs/vim/v8.0/bin
-    /grid/common/pkgs/git/v2.8.3/bin
-    /grid/common/pkgs/perforce/latest/bin/
-    /grid/common/pkgs/ccrtools/
-    /grid/common/bin 
     $path
+    # if appending current directory to path, put it at the very end
+    .
 )
 
 # nice colors in shell
