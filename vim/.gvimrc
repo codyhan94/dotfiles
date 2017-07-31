@@ -1,3 +1,3 @@
 "set lines=999 columns=999
-set guifont=Pragmata\ Pro\ 12
+set guifont=Pragmata\ Pro\ 11
 

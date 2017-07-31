@@ -1,3 +1,5 @@
+# source from
+# https://github.com/JDevlieghere/dotfiles/blob/master/.vim/.ycm_extra_conf.py
 import os
 import os.path
 import fnmatch
