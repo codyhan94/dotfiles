@@ -250,7 +250,7 @@ let g:tagbar_autofocus = 1
 " => YouCompleteMe customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " something sane to use as a default
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
 " close completion preview after accepting completion
 let g:ycm_autoclose_preview_window_after_completion = 1
