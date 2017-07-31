@@ -47,7 +47,7 @@
 set history=500
 
 " disabled plugins
-let g:pathogen_disabled=['syntastic']
+let g:pathogen_disabled=['syntastic', 'YouCompleteMe']
 
 " pathogen infect before filetype stuff
 execute pathogen#infect()
@@ -247,6 +247,14 @@ let g:tagbar_autofocus = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => YouCompleteMe customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" specify python
+let g:ycm_server_python_interpreter = '/grid/common/pkgs/python/v3.6.1/bin/python3'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => cindent options
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " place case labels at the same indent level as the switch statement
@@ -361,7 +369,6 @@ if has("gui_running")
 else
     set background=light
     "let g:solarized_termcolors=256
-    "colorscheme solarized
     colorscheme solarized
 endif
 
@@ -479,6 +486,9 @@ endtry
 
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" But not for git commit files
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
 
 """"""""""""""""""""""""""""""

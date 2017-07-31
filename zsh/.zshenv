@@ -35,7 +35,3 @@ export USE_ERROFF=1
 # tell cadence wrapper scripts to use 64bit versions of tools
 export CDS_AUTO_64BIT=ALL
 
-# save paths
-export DEFAULT_PATH=$PATH
-export DEFAULT_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
-

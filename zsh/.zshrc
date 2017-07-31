@@ -142,6 +142,8 @@ path=(
     #/home/codyh/p4builds/617Main/tools/dfII/pvt/bin
     # for ecbuild
     # /eng/tools/cic/cm/bin/
+    # one day we might get YCM working here
+    #/grid/common/pkgs/gcc/latest/bin
     # put before emacs so we use exuberant tags instead of emacs ctags
     /grid/common/pkgs/ctags/latest/bin
     /grid/common/pkgs/emacs/v25.1/bin
@@ -149,12 +151,23 @@ path=(
     /grid/common/pkgs/python/v3.6.1/bin
     /grid/common/pkgs/vim/v8.0/bin
     /grid/common/pkgs/git/v2.8.3/bin
-    /grid/common/pkgs/perforce/latest/bin/
-    /grid/common/pkgs/ccrtools/
+    /grid/common/pkgs/perforce/latest/bin
+    /grid/common/pkgs/ccrtools
     /grid/common/bin 
     $path
 )
+# one day we might get YCM working here
+#typeset -TU LD_LIBRARY_PATH ld_library_path
+#ld_library_path=(
+    #/grid/common/pkgs/gcc/latest/lib64
+    #/grid/common/pkgs/python/v2.7.10/lib
+    #~/dotfiles/vim/.vim/bundle/YouCompleteMe/third_party/ycmd
+    #$ld_library_path
+#)
 
+# save paths
+export DEFAULT_PATH=$PATH
+export DEFAULT_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
 # Entirety of my startup file... then
 if [[ "$PROFILE_STARTUP" = true ]]; then
