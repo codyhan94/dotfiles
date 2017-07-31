@@ -82,3 +82,7 @@
 	path = vim/.vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar
     ignore = dirty
+[submodule "vim/.vim/bundle/YouCompleteMe"]
+	path = vim/.vim/bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe
+    ignore = dirty
