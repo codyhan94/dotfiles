@@ -128,7 +128,7 @@ let g:ctrlp_max_depth=5
 
 " c: current file, r: nearest ancestor root (git hg svn bzr), a: c if cwd is not
 " a direct ancestor of current file's directory, w: cwd
-let g:ctrlp_working_path_mode='wa'
+let g:ctrlp_working_path_mode='ra'
 
 " experimental async (only with ctrlp_user_command set though)
 " disable for now because it's a bit buggy
@@ -244,6 +244,47 @@ nmap <silent> <leader>t :TagbarToggle<cr>
 " autofocus and autoclose the tag bar
 let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => YouCompleteMe customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" something sane to use as a default
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
+" close completion preview after accepting completion
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+" specify to use python2 here because we built with python2
+let g:ycm_server_python_interpreter = 'python2'
+
+" find completions when 'using namespace std'
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_semantic_triggers =  {
+  \   'c' : ['->', '.','re![_a-zA-z0-9]'],
+  \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+  \             're!\[.*\]\s'],
+  \   'ocaml' : ['.', '#'],
+  \   'cpp,objcpp' : ['->', '.', '::','re![_a-zA-Z0-9]'],
+  \   'perl' : ['->'],
+  \   'php' : ['->', '::'],
+  \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+  \   'ruby' : ['.', '::'],
+  \   'lua' : ['.', ':'],
+  \   'erlang' : [':'],
+  \ }
+
+" airline focus: https://github.com/vim-airline/vim-airline/issues/1125
+let g:airline_exclude_preview = 1
+
+" disable <tab> for YCM so it plays well with UltiSnips. see:
+" https://github.com/Valloric/YouCompleteMe/issues/36#issuecomment-15451411
+" for more ideas
+let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+
+" Prevent ultisnips from losing its place after YCM completion
+set completeopt-=preview
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
