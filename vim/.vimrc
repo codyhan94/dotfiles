@@ -259,6 +259,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_server_python_interpreter = 'python2'
 
 " find completions when 'using namespace std'
+" https://github.com/Valloric/YouCompleteMe/issues/600
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_semantic_triggers =  {
   \   'c' : ['->', '.','re![_a-zA-z0-9]'],
@@ -273,6 +274,8 @@ let g:ycm_semantic_triggers =  {
   \   'lua' : ['.', ':'],
   \   'erlang' : [':'],
   \ }
+" limit the height of the popup menu
+set pumheight=10
 
 " airline focus: https://github.com/vim-airline/vim-airline/issues/1125
 let g:airline_exclude_preview = 1
