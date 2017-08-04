@@ -107,7 +107,7 @@ nnoremap <Leader>f :NERDTreeToggle<cr>
 nnoremap <silent> <Leader>v :NERDTreeFind<cr>
 
 " close NERDTree automatically when we open a file
-let NERDTreeQuitOnOpen=1
+"let NERDTreeQuitOnOpen=1
 
 " automatically delete buffer of a file that we delete with NERDTree
 let NERDTreeAutoDeleteBuffer=1
