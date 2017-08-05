@@ -130,15 +130,9 @@ let g:ctrlp_max_depth=5
 " a direct ancestor of current file's directory, w: cwd
 let g:ctrlp_working_path_mode='wa'
 
-" experimental async (only with ctrlp_user_command set though)
-" disable for now because it's a bit buggy
-"let g:ctrlp_user_command_async=1
-
-" Optimize file searching
-if executable('ag')
-    " Use ag to list files
-    let g:ctrlp_user_command =
-                \ 'ag %s --files-with-matches --follow -g "" --nocolor --ignore "\.git$\|\.hg$\|\.svn$"'
+" Optimize file searching with ripgrep
+if executable('rg')
+    let g:ctrlp_user_command = 'rg --color=never --follow --files %s'
 endif
 
 " Sane Ignore For ctrlp from
