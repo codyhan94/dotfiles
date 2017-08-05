@@ -54,7 +54,7 @@ Xft*rgba: rgb
 Xft*hinting: true
 Xft*autohint: false
 Xft*lcdfilter: lcddefault
-Xft*hintstyle: hintfull
+Xft*hintstyle: hintslight
 Xft.dpi: 96
 xterm*faceName: SourceCodePro
 xterm*faceSize: 9
@@ -81,6 +81,8 @@ xterm*bellIsUrgent: true
 #define t_aqua #8abeb7
 #define t_blue #81a2be
 #define t_purple #b294bb
+! fix cursor size in chrome/ff maybe?
+Xcursor.size: 16
 !  
 ! terminal colours
 *background: t_background
