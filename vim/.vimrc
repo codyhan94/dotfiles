@@ -116,7 +116,12 @@ let g:ctrlp_max_depth=5
 
 " c: current file, r: nearest ancestor root (git hg svn bzr), a: c if cwd is not
 " a direct ancestor of current file's directory, w: cwd
-let g:ctrlp_working_path_mode='wa'
+let g:ctrlp_working_path_mode='ra'
+
+" Optimize file searching with ripgrep
+if executable('rg')
+    let g:ctrlp_user_command = 'rg --color=never --files %s'
+endif
 
 " Sane Ignore For ctrlp from
 " https://gist.github.com/leehambley/67de417c5c38f0ff8093
@@ -124,6 +129,12 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
   \ 'file': '\.exe$\|\.so$\|\.dat$'
   \ }
+
+" Add mapping for buffer search
+nnoremap <silent> <leader>b :CtrlPBuffer<cr>
+
+" Add mapping for MRU file search
+nnoremap <silent> <leader>m :CtrlPMRUFiles<cr>
 
 " Show hidden files (or not)
 let g:ctrlp_show_hidden=0
@@ -134,13 +145,19 @@ let g:ctrlp_show_hidden=0
 " noremap <C-S-p> :CtrlPBuffer<cr>
 
 " Follow symlinks but ignore looped internal symlinks to avoid duplicates
-let g:ctrlp_follow_symlinks=1
+let g:ctrlp_follow_symlinks = 1
 
 " unlimited number of files
-let g:ctrlp_max_files=0
+let g:ctrlp_max_files = 0
 
 " include current file in match entries
 let g:ctrlp_match_current_file = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => tagbar customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <silent> <leader>t :TagbarToggle<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -541,7 +558,7 @@ map <leader>s? z=
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+"noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Quickly open a buffer for scribble
 map <leader>q :e ~/buffer<cr>
