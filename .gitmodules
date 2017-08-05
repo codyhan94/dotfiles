@@ -66,6 +66,7 @@
 	path = vim/.vim/bundle/YCM-Generator
 	url = https://github.com/rdnetto/YCM-Generator
     ignore = dirty
+    branch = stable
 [submodule "vim/.vim/bundle/ultisnips"]
 	path = vim/.vim/bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips
