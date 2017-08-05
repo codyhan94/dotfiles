@@ -130,15 +130,9 @@ let g:ctrlp_max_depth=5
 " a direct ancestor of current file's directory, w: cwd
 let g:ctrlp_working_path_mode='ra'
 
-" experimental async (only with ctrlp_user_command set though)
-" disable for now because it's a bit buggy
-"let g:ctrlp_user_command_async=1
-
-" Optimize file searching
-if executable('ag')
-    " Use ag to list files
-    let g:ctrlp_user_command =
-                \ 'ag %s --files-with-matches --follow -g "" --nocolor --ignore "\.git$\|\.hg$\|\.svn$"'
+" Optimize file searching with ripgrep
+if executable('rg')
+    let g:ctrlp_user_command = 'rg --color=never --files %s'
 endif
 
 " Sane Ignore For ctrlp from
@@ -177,6 +171,12 @@ let g:ctrlp_match_current_file = 1
 
 " set up buffer deletion from within ctrlp
 call ctrlp_bdelete#init()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => tagbar customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <silent> <leader>t :TagbarToggle<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
