@@ -242,8 +242,8 @@ let g:ale_c_gcc_options='-std=c99 -Wall -Wextra'
 nmap <silent> <leader>t :TagbarToggle<cr>
 
 " autofocus and autoclose the tag bar
-let g:tagbar_autoclose = 1
-let g:tagbar_autofocus = 1
+"let g:tagbar_autoclose = 1
+"let g:tagbar_autofocus = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
