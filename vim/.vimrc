@@ -47,7 +47,7 @@
 set history=500
 
 " disabled plugins
-let g:pathogen_disabled=['syntastic', 'YouCompleteMe']
+let g:pathogen_disabled=['syntastic', 'YouCompleteMe', 'minibufexpl.vim']
 
 " pathogen infect before filetype stuff
 execute pathogen#infect()
@@ -97,6 +97,9 @@ map <F3> ggVGg?
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
+
+" Make vim recognize //! as a C/C++ comment
+autocmd FileType c,cpp set comments^=:///,://!
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -238,6 +241,10 @@ nmap <silent> <leader>t :TagbarToggle<cr>
 " autofocus and autoclose the tag bar
 "let g:tagbar_autoclose = 1
 "let g:tagbar_autofocus = 1
+
+" this has nothing to do with tagbar but modifies the tag path
+" semicolon searches upward, tagTypes is for rodger's vimTags script
+set tags+=./tagTypes;,./tags;
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
