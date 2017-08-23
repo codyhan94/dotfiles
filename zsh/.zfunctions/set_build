@@ -1,0 +1,16 @@
+# set_p4build with an argument
+if [[ -z "$1" ]]; then
+    echo "need arg to be one of"
+    echo ""
+    /bin/ls ~/p4builds/
+    return 1
+fi
+if [[ ! -d "${HOME}/p4builds/$1" ]]; then
+    echo "invalid directory, pass one of"
+    echo ""
+    /bin/ls ~/p4builds/
+    return 1
+fi
+viva_target=$1
+source ~/bin/set_bld_environment
+

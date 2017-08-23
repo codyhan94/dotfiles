@@ -1,0 +1,51 @@
+buildComplete=$CDSHOME/buildComplete
+
+VER=$($buildComplete/bin/viva -W 2>&1)
+THIS_VER=$(viva -W 2>&1)
+
+done="`stat --format %z $buildComplete/BUILD_DONE`"
+startime="`cat $buildComplete/BuildLogs/startBuild*`"
+lastcl=`cat $buildComplete/BuildLogs/allCLs.latest`
+
+echo "############################################################################"
+echo "# Setting build env. to:$bld"
+echo "# Build viva_target: $viva_target"
+echo "# scratchdir=$scratchdir"
+echo "# HIER_ROOT=$HIER_ROOT"
+echo "# CDN_INST_DIR=$HIER_ROOT"
+echo "# CDN=$CDN"
+echo "# dfII= $dfII"
+echo "# test= $test"
+echo "# ref build start:    $startime"
+echo "# ref build done:     $done"
+echo "# ref build last CL:  "$lastcl
+echo ""
+echo "# ref version:      $VER"
+echo "# this version:     $THIS_VER"
+echo "# spectre:         `which spectre`"
+echo "# viva:            `which viva`"
+echo "# ddtool:          `which ddtool`"
+echo "# virtuoso:        `which virtuoso`"
+echo "# srrReader:       `which srrReader`"
+echo "# psfWriter:       `which psfWriter`"
+echo ""
+echo " mviva <filename>" 
+echo ""
+echo "commands:"
+echo "    p4sync   sync the current dfII/group"
+echo "    gotosrc <projectName> <fileName>"
+echo "    editsrc <projectName> <filename>"
+echo "    list_path , listdiff.sh"
+echo "    /grid/cic/common/bin/pushTestData.pl -d viva/XXXX/mydir -c \"comment\" <file>"
+echo "    vbuild, vbuildall, vbuildall_scratch ecbuild , get-sumary"
+echo "    p4: p4diff , p4status ,  p4 client , p4-merge , p4Submit.pl "
+echo "    ccrprint <ccrNB> , ccrpull<ccrNB> fileName"
+echo "    ccrprint -q <ccr#>" 
+echo "    unset USE_ERROFF  : turn off, show warnings during build"
+echo "    cictest-grid [-l (runs until error)]"
+echo "    virtuoso_ldd"
+echo "    tests: cictest-grid , cictest -noxserver"
+echo "    compare test /home/ramanip/scripts/gensum.sh"
+echo "    pcr2ccr (convert pcr2ccr test)"
+echo "############################################################################"
+

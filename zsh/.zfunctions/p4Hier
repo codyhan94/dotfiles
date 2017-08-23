@@ -1,0 +1,129 @@
+chosen=$1
+if [ "$2" = "" ]; then
+    root=$HOME/p4builds
+else
+    root=$2
+fi
+if [ "$1" = "" ]; then
+    echo "Choose one of these directories and enter it on the command line"
+    echo ""
+    /bin/ls $root
+    return 1
+fi
+
+if [ "$chosen" = "" ]; then
+    echo "Error: You did not choose a valid hierarchy."
+    return 1
+fi
+
+chosenPath=$root/$chosen
+if [ ! -d $chosenPath ]; then
+echo "Error: the chosen hierarchy $chosen does not exist."
+return 1
+fi
+export HIER_ROOT=$chosenPath
+# See if we're using a 64bit or 32 bit build
+# grep 32bit $HIER_ROOT/dfII_config_spec
+env | grep -w 64BIT >& /dev/null
+if [ $? != 0 ]; then
+    QTBIT=32bit
+else
+    export CDS_AUTO_64BIT=ALL QTBIT=64bit
+fi
+tmpPath=$HIER_ROOT/tools/bin
+tmpPath=$HIER_ROOT/tools/dfII/bin:$tmpPath
+tmpPath=$HIER_ROOT/tools/dfII/pvt/bin:$tmpPath
+tmpPath=$HIER_ROOT/tools/Qt/$QTBIT/bin:$tmpPath
+tmpPath=$HIER_ROOT/tools/java/bin:$tmpPath
+tmpPath=/grid/cic/viva/scripts:$tmpPath
+
+#-------------------------------
+# Path to add old but working ecbuildv script
+#-------------------------------
+tmpPath=/eng/tools/cic/cm/bin:$tmpPath
+
+
+#-------------------------------
+# Path setup to include simulators (spectre)
+#-------------------------------
+arch=`$HIER_ROOT/tools/bin/cds_plat`
+#export SIMHIER_ROOT=/grid/cic/IC6.1.6/main/$arch/64/MMSIM/latest/tools/
+#tmpPath=$tmpPath:$SIMHIER_ROOT/bin
+
+#-------------------------------
+# Path to get comparescan
+#-------------------------------
+tmpPath=$tmpPath:/grid/cic/ams/avs122_hf_ams/pink/tools/bin
+
+#-------------------------------
+# Set various variables that configure my environment nicely.
+#-------------------------------
+export PATH=$PATH:$tmpPath
+export PATH=$tmpPath:$PATH
+
+export CDPATH=.:$HIER_ROOT/tools/dfII/group
+
+# !!! TBD
+# export PROMPT_COMMAND='set_dev_titlebar $chosen: `dirs`'
+
+if [ $QTBIT = 32bit ]; then
+    export LD_LIBRARY_PATH=$HIER_ROOT/tools/lib:$HIER_ROOT/tools/dfII/lib:$HIER_ROOT/tools/Qt/$QTBIT/lib:$simLibPath
+else
+    export LD_LIBRARY_PATH=$HIER_ROOT/tools/lib/$QTBIT:$HIER_ROOT/tools/dfII/lib/$QTBIT:$HIER_ROOT/tools/Qt/$QTBIT/lib:$simLibPath
+fi
+# export LD_LIBRARY_PATH=$HIER_ROOT/tools/hdf/lib/64bit:$LD_LIBRARY_PATH
+
+export SHLIB_PATH=$LD_LIBRARY_PATH
+export LIBPATH=$LD_LIBRARY_PATH
+# export CLASS_PATH=$HIER_ROOT/share/java/srr.jar:$HIER_ROOT/share/java/cds_srr.jar:$HIER_ROOT/share/java/wavescan.jar:$HIER_ROOT/share/java/wsutil.jar
+
+VIVA_ROOT="$HIER_ROOT/tools/dfII/group/viva"
+SRR_ROOT="$HIER_ROOT/tools/dfII/group/srr"
+AWD_ROOT="$HIER_ROOT/tools/dfII/group/awd"
+VAX_ROOT="$HIER_ROOT/tools/dfII/group/vax"
+export TAGS="$VIVA_ROOT/src/tagTypes,$VIVA_ROOT/src/tags,$SRR_ROOT/src/tagTypes,$SRR_ROOT/src/tags,$VAX_ROOT/src/tagTypes,$VAX_ROOT/src/tags"
+#-------------------------------
+# Create an alias to go to OBJDIR as used in the GNUmakefiles
+#-------------------------------
+alias cdo="pushd $HIER_ROOT/tools/dfII/obj"
+
+#-------------------------------
+# Create an alias function to go to test as used in the GNUmakefiles
+#-------------------------------
+function pdt
+{
+    dir=$1
+    pushd $HIER_ROOT/tools/dfII/test/$dir
+}
+
+#-------------------------------
+# Create an alias function to set my environmet for creating 64bit
+# builds and running 64bit builds
+#-------------------------------
+function use64
+{
+    export CDS_AUTO_64BIT=ALL
+    export QTDIR=$HIER_ROOT/tools/Qt/64bit
+    export LD_LIBRARY_PATH=$HIER_ROOT/tools/lib/64bit:$HIER_ROOT/tools/dfII/lib/64bit:$HIER_ROOT/tools/Qt/64bit/lib:$simLibPath
+
+    export LD_LIBRARY_PATH=$HIER_ROOT/tools/hdf/lib/64bit:$LD_LIBRARY_PATH
+
+}
+
+#-------------------------------
+# Go to the dfII/group directory and set some more variables from there
+#-------------------------------
+cd $HIER_ROOT/tools/dfII/group
+export HIER_BRANCH=`p4 info | grep "Client name:"`
+
+#-------------------------------
+# Use the proper Qt/$QTBIT installation
+#-------------------------------
+export QTDIR=$HIER_ROOT/tools/Qt/$QTBIT
+
+# Enable addition comnpile time warnings and other checks
+export USE_ERROFF=1
+export USE_QT_DEBUG=true
+
+return 0
+

@@ -85,6 +85,18 @@ alias setrun_617_ISR11="export BLDTYPE='IC6.1.7/ISR11'; source ~/bin/set_run_env
 alias setrun_617_ISR12="export BLDTYPE='IC6.1.7/ISR12'; source ~/bin/set_run_environment"
 alias setrun_617_ISR13="export BLDTYPE='IC6.1.7/ISR13'; source ~/bin/set_run_environment"
 
-alias setbld_I617_EAV='export viva_target=617EAV; source ~/bin/set_bld_environment'
-alias setbld_IC617_main='export viva_target=617Main; source ~/bin/set_bld_environment'
+alias setbld_I617_EAV='export viva_target=617EAV2; source ~/bin/set_bld_environment'
+alias setbld_IC617_main='export viva_target=617Main2; source ~/bin/set_bld_environment'
+alias setbld_here='export viva_target=${PWD##*/}; export HIER_ROOT=${PWD}; source ~/bin/set_bld_environment'
+
+# convert these to zsh later
+#alias lsfcictest 'export CICTEST_LSFTIMER=15;export CICTEST_PROJECT="IC:IC6.1.7:RD:quicktest"; cictest -split -lsf -queue lnx64 -lsfParam \"-R OSREL==EE50 \" -timer 900'
+
+#alias lsfcictest 'export MATRIX_ROOT_DIR=/grid/sfi/matrix03/vgrid57/;export
+#MATRIX_JOBSIZE=1;export CICTEST_PROJECT="RD:quickTests"; cictest -split -lsf -queue lnx64 -lsfParam \"-R OSREL==EE50 \" -timer 900'
+
+#alias lsfcictest 'export MATRIX_ROOT_DIR=/grid/sfi/matrix03/vgrid57/;export
+#MATRIX_JOBSIZE=1;export CICTEST_PROJECT="RD:quickTests"; cictest -split -lsf -queue lnx64 -lsfParam "\-R OSNAME==Linux && OSREL==EE50  " -timer 600'
+
+alias lsfcictest='export MATRIX_ROOT_DIR=/grid/sfi/matrix03/vgrid57/;export MATRIX_JOBSIZE=1;export CICTEST_PROJECT="RD:quickTests"; cictest -split -lsf -queue lnx64 -lsfParam \"-R OSREL==EE50 \" -timer 600'
 

@@ -1,5 +1,5 @@
 # simple profiling, uncomment to enable
-#zmodload zsh/zprof
+zmodload zsh/zprof
 
 # more in depth profiler
 PROFILE_STARTUP=false
@@ -135,6 +135,9 @@ setopt hist_ignore_all_dups
 # https://github.com/robbyrussell/oh-my-zsh/issues/449
 unsetopt nomatch
 
+# functions for setting CDS environment
+autoload -Uz set_build p4Hier absHier buildinfo
+
 # don't duplicate anything in path
 typeset -U path
 path=(
@@ -146,7 +149,7 @@ path=(
     # for ecbuild
     # /eng/tools/cic/cm/bin/
     # one day we might get YCM working here
-    #/grid/common/pkgs/gcc/latest/bin
+    /grid/common/pkgs/gcc/latest/bin
     # put before emacs so we use exuberant tags instead of emacs ctags
     /grid/common/pkgs/ctags/latest/bin
     /grid/common/pkgs/emacs/v25.1/bin
@@ -158,6 +161,8 @@ path=(
     /grid/common/pkgs/ccrtools
     /grid/common/bin 
     $path
+    # put current directory at the very end of path
+    .
 )
 # one day we might get YCM working here
 #typeset -TU LD_LIBRARY_PATH ld_library_path
