@@ -89,6 +89,9 @@ source $ZSH/oh-my-zsh.sh
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
+# custom ripgrep command
+rg () { command rg -p "$@" | less -RFX; }
+
 # cdr for cd history "cd-recent"
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
