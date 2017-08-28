@@ -80,7 +80,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export MANPATH="~/share/man:$MANPATH"
+export MANPATH="${HOME}/share/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -136,7 +136,7 @@ setopt hist_ignore_all_dups
 unsetopt nomatch
 
 # functions for setting CDS environment
-autoload -Uz set_build p4Hier absHier buildinfo
+autoload -Uz set_build p4Hier absHier buildinfo use64
 
 # don't duplicate anything in path
 typeset -U path

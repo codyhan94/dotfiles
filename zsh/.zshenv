@@ -25,8 +25,8 @@ export CUPS_SERVER=localhost
 
 # for running Qt designer (among other things)
 #root=/home/codyh/ubuild/dfII/ubuild_71848/tools
-root=/home/codyh/p4builds/617Main/tools
-export LD_LIBRARY_PATH=$root/lib/64bit:$root/dfII/lib/64bit:$root/Qt/64bit/lib
+#root=/home/codyh/p4builds/617Main/tools
+#export LD_LIBRARY_PATH=$root/lib/64bit:$root/dfII/lib/64bit:$root/Qt/64bit/lib
 # /opt/cuda/lib64:/opt/cuda/lib:$LD_LIBRARY_PATH
 
 # tell compiler to not generate warnings - don't want viva to have warnings

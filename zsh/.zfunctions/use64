@@ -1,0 +1,10 @@
+#-------------------------------
+# Create an alias function to set my environmet for creating 64bit
+# builds and running 64bit builds
+#-------------------------------
+export CDS_AUTO_64BIT=ALL
+export QTDIR=$HIER_ROOT/tools/Qt/64bit
+export LD_LIBRARY_PATH=$HIER_ROOT/tools/lib/64bit:$HIER_ROOT/tools/dfII/lib/64bit:$HIER_ROOT/tools/Qt/64bit/lib:$simLibPath
+
+export LD_LIBRARY_PATH=$HIER_ROOT/tools/hdf/lib/64bit:$LD_LIBRARY_PATH
+
