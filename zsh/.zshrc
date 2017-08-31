@@ -159,7 +159,8 @@ path=(
     /grid/common/pkgs/git/v2.8.3/bin
     /grid/common/pkgs/perforce/latest/bin
     /grid/common/pkgs/ccrtools
-    /grid/common/bin 
+    /grid/common/pkgs/ncdu/latest/bin
+    /grid/common/bin
     $path
     # put current directory at the very end of path
     .
@@ -172,6 +173,13 @@ path=(
     #~/dotfiles/vim/.vim/bundle/YouCompleteMe/third_party/ycmd
     #$ld_library_path
 #)
+
+# for debugging completions
+#zstyle ‘:completion:*’ verbose yes
+#zstyle ‘:completion:*:descriptions’ format ‘%B%d%b’
+#zstyle ‘:completion:*:messages’ format ‘%d’
+#zstyle ‘:completion:*:warnings’ format ‘No matches for: %d’
+#zstyle ‘:completion:*’ group-name ”
 
 # save paths
 export DEFAULT_PATH=$PATH

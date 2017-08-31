@@ -1,0 +1,4 @@
+#compdef set_build
+
+_path_files -/ -W $HOME/p4builds
+
