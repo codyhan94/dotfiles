@@ -2,6 +2,7 @@
 alias ls='ls -hF --color=auto'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
+alias less='less -RFX'
 alias df='df -h'
 alias du='du -c -h'
 alias mkdir='mkdir -p -v'

@@ -110,7 +110,7 @@ export MANPATH="${HOME}/share/man:$MANPATH"
 # Source our aliases and scripts
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
 #[[ -f ~/perlscripts/cdh.zsh ]] && . ~/perlscripts/cdh.zsh
-[[ -f ~/etc/cdhist.bashrc ]] && . ~/etc/cdhist.bashrc
+#[[ -f ~/etc/cdhist.bashrc ]] && . ~/etc/cdhist.bashrc
 
 # gvim client/server
 gvim () { command gvim --remote-tab-silent "$@" || command gvim "$@"; }
@@ -148,6 +148,7 @@ path=(
     #/home/codyh/p4builds/617Main/tools/dfII/pvt/bin
     # for ecbuild
     # /eng/tools/cic/cm/bin/
+    /grid/common/pkgs/tmux/v2.1/bin
     # one day we might get YCM working here
     /grid/common/pkgs/gcc/latest/bin
     # put before emacs so we use exuberant tags instead of emacs ctags
@@ -180,6 +181,10 @@ path=(
 #zstyle ‘:completion:*:messages’ format ‘%d’
 #zstyle ‘:completion:*:warnings’ format ‘No matches for: %d’
 #zstyle ‘:completion:*’ group-name ”
+
+# label cdpath vs local directory completions
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format %d
 
 # save paths
 export DEFAULT_PATH=$PATH

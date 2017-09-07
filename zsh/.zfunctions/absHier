@@ -50,9 +50,10 @@ tmpPath=$tmpPath:/grid/cic/ams/avs122_hf_ams/pink/tools/bin
 #-------------------------------
 export CDSHOME=$HIER_ROOT
 export PATH=$PATH:$tmpPath
-export PATH=$tmpPath:$PATH
 
-export CDPATH=.:$HIER_ROOT/tools/dfII/group
+# don't export CDPATH!!! may break scripts that use `cd`
+#export CDPATH=.:$HIER_ROOT/tools/dfII/group
+CDPATH=.:$HIER_ROOT/tools/dfII/group
 
 # !!! TBD
 # export PROMPT_COMMAND='set_dev_titlebar $chosen: `dirs`'
@@ -86,20 +87,6 @@ function pdt
 {
     dir=$1
     pushd $HIER_ROOT/tools/dfII/test/$dir
-}
-
-#-------------------------------
-# Create an alias function to set my environmet for creating 64bit
-# builds and running 64bit builds
-#-------------------------------
-function use64
-{
-    export CDS_AUTO_64BIT=ALL
-    export QTDIR=$HIER_ROOT/tools/Qt/64bit
-    export LD_LIBRARY_PATH=$HIER_ROOT/tools/lib/64bit:$HIER_ROOT/tools/dfII/lib/64bit:$HIER_ROOT/tools/Qt/64bit/lib:$simLibPath
-
-    export LD_LIBRARY_PATH=$HIER_ROOT/tools/hdf/lib/64bit:$LD_LIBRARY_PATH
-
 }
 
 #-------------------------------

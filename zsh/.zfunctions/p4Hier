@@ -58,10 +58,10 @@ tmpPath=$tmpPath:/grid/cic/ams/avs122_hf_ams/pink/tools/bin
 #-------------------------------
 # Set various variables that configure my environment nicely.
 #-------------------------------
+export CDSHOME=$HIER_ROOT
 export PATH=$PATH:$tmpPath
-export PATH=$tmpPath:$PATH
 
-export CDPATH=.:$HIER_ROOT/tools/dfII/group
+CDPATH=.:$HIER_ROOT/tools/dfII/group
 
 # !!! TBD
 # export PROMPT_COMMAND='set_dev_titlebar $chosen: `dirs`'
