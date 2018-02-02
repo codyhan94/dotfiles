@@ -24,12 +24,13 @@ fi
 export HIER_ROOT=$chosenPath
 # See if we're using a 64bit or 32 bit build
 # grep 32bit $HIER_ROOT/dfII_config_spec
-env | grep -w 64BIT >& /dev/null
-if [ $? != 0 ]; then
-    QTBIT=32bit
-else
-    export CDS_AUTO_64BIT=ALL QTBIT=64bit
-fi
+#env | grep -w 64BIT >& /dev/null
+#if [ $? != 0 ]; then
+    #QTBIT=32bit
+#else
+# always use 64bit now
+export CDS_AUTO_64BIT=ALL QTBIT=64bit
+#fi
 tmpPath=$HIER_ROOT/tools/bin
 tmpPath=$HIER_ROOT/tools/dfII/bin:$tmpPath
 tmpPath=$HIER_ROOT/tools/dfII/pvt/bin:$tmpPath

@@ -84,6 +84,7 @@ alias setrun_617_ISR10="export BLDTYPE='IC6.1.7/ISR10'; source ~/bin/set_run_env
 alias setrun_617_ISR11="export BLDTYPE='IC6.1.7/ISR11'; source ~/bin/set_run_environment"
 alias setrun_617_ISR12="export BLDTYPE='IC6.1.7/ISR12'; source ~/bin/set_run_environment"
 alias setrun_617_ISR13="export BLDTYPE='IC6.1.7/ISR13'; source ~/bin/set_run_environment"
+alias setrun_617_ISR14="export BLDTYPE='IC6.1.7/ISR14'; source ~/bin/set_run_environment"
 
 alias setbld_I617_EAV='export viva_target=617EAV2; source ~/bin/set_bld_environment'
 alias setbld_IC617_main='export viva_target=617Main2; source ~/bin/set_bld_environment'
