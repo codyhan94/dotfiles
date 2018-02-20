@@ -101,6 +101,11 @@ command W w !sudo tee % > /dev/null
 " Make vim recognize //! as a C/C++ comment
 autocmd FileType c,cpp set comments^=:///,://!
 
+" Ignore boost in include files so that auto-completion doesn't die.
+" Turn this off by setting include manually to the default string if we want
+" boost completions.
+set include=^\\s*#\\s*include\ \\(<boost/\\)\\@!
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => NERDTree customizations
@@ -228,8 +233,8 @@ let g:ale_linters = {
             \ 'c': ['gcc']
             \ }
 "let g:ale_cpp_gcc_executable='g++'
-let g:ale_cpp_gcc_options='-std=c++98 -Wall -Wextra'
-let g:ale_c_gcc_options='-std=c99 -Wall -Wextra'
+let g:ale_cpp_gcc_options='-std=c++11 -Wall -Wextra'
+let g:ale_c_gcc_options='-std=c11 -Wall -Wextra'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

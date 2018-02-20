@@ -34,6 +34,7 @@ export CDS_AUTO_64BIT=ALL QTBIT=64bit
 tmpPath=$HIER_ROOT/tools/bin
 tmpPath=$HIER_ROOT/tools/dfII/bin:$tmpPath
 tmpPath=$HIER_ROOT/tools/dfII/pvt/bin:$tmpPath
+tmpPath=$HIER_ROOT/tools/dfII/pvt/bin/64bit:$tmpPath
 tmpPath=$HIER_ROOT/tools/Qt/$QTBIT/bin:$tmpPath
 tmpPath=$HIER_ROOT/tools/java/bin:$tmpPath
 tmpPath=/grid/cic/viva/scripts:$tmpPath
