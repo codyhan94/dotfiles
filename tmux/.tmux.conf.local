@@ -270,8 +270,14 @@ unbind C-a
 # from gist.github.com/spicycode/1229612 (best tmux conf)
 set -g history-limit 10000
 
+# decrease repeat timeout, we have better than 300ms VRT
+set -sg repeat-time 300
+
 setw -g mode-keys vi
-#setw -g mode-mouse on
+set -g mouse on
+# sane scrolling from
+# https://superuser.com/questions/209437/how-do-i-scroll-in-tmux#comment212683_209608
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'copy-mode -e; send-keys -M'"
 # might need to turn this off, don't want distraction from non-focused windows
 setw -g monitor-activity on
 
