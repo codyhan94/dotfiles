@@ -42,7 +42,7 @@ tmux_conf_new_session_prompt=false
 # RGB 24-bit colour support (tmux >= 2.2), possible values are:
 #  - true
 #  - false (default)
-tmux_conf_theme_24b_colour=false
+tmux_conf_theme_24b_colour=true
 
 # window style
 tmux_conf_theme_window_fg='default'
@@ -162,7 +162,8 @@ tmux_conf_theme_status_right='#{prefix}#{pairing} #{?battery_status, #{battery_s
 
 # status left style
 tmux_conf_theme_status_left_fg='#000000,#e4e4e4,#e4e4e4'  # black, white , white
-tmux_conf_theme_status_left_bg='#ffff00,#ff00af,#00afff'  # yellow, pink, white blue
+#tmux_conf_theme_status_left_bg='#ffff00,#ff00af,#00afff'  # yellow, pink, white blue
+tmux_conf_theme_status_left_bg='#f0c674,#cc6666,#8abeb7'  # yellow, pink, white blue
 tmux_conf_theme_status_left_attr='bold,none,none'
 
 # status right style
@@ -271,7 +272,7 @@ unbind C-a
 set -g history-limit 10000
 
 # decrease repeat timeout, we have better than 300ms VRT
-set -sg repeat-time 300
+set -sg repeat-time 250
 
 setw -g mode-keys vi
 set -g mouse on
@@ -317,11 +318,12 @@ bind -n M-Down select-pane -D
 bind -n S-Left  previous-window
 bind -n S-Right next-window
 
+# more window navigation (putting these back)
+bind -r p previous-window # select previous window
+bind -r n next-window     # select next window
+
 # No delay for escape key press
 set -sg escape-time 0
-
-# Reload tmux config
-bind r source-file ~/.tmux.conf
 
 # THEME
 #set -g status-bg black
