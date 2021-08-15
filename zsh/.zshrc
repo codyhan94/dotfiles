@@ -118,6 +118,7 @@ prompt pure
 # path setup
 typeset -U path
 path=(
+    /opt/homebrew/bin
     ~/bin
     ~/.cabal/bin
     /usr/local/bin
@@ -132,3 +133,8 @@ path=(
 unsetopt beep
 setopt hist_ignore_all_dups
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# opam configuration
+[[ ! -r /Users/codyhan/.opam/opam-init/init.zsh ]] || source /Users/codyhan/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
