@@ -355,9 +355,9 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 else
-    set bg=light
-    let g:solarized_termcolors=256
-    colorscheme solarized
+    "set bg=light
+    "let g:solarized_termcolors=256
+    colorscheme base16-tomorrow-night
 endif
 
 " Set extra options when running in GUI mode
