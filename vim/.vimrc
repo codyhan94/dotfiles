@@ -202,16 +202,17 @@ let g:ale_linters = {
             \ 'cpp': ['g++'],
             \ 'c': ['gcc']
             \ }
-"let g:ale_cpp_gcc_executable='g++'
-let g:ale_cpp_gcc_options='-std=c++98 -Wall -Wextra'
-let g:ale_c_gcc_options='-std=c99 -Wall -Wextra'
+let g:ale_cpp_cc_options='-std=c++20'
+let g:ale_c_cc_options='-std=c17'
+"let g:ale_cpp_cc_options='-std=c++20 -Wall -Wextra'
+"let g:ale_c_cc_options='-std=c17 -Wall -Wextra'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => YouCompleteMe customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " something sane to use as a default
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
 " close completion preview after accepting completion
 let g:ycm_autoclose_preview_window_after_completion = 1
