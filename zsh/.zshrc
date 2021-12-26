@@ -2,6 +2,15 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# fpath setup
+fpath=(
+    # for stuff like pure
+    ~/dotfiles/zsh/.zfunctions
+    # homebrew completions
+    /opt/homebrew/share/zsh/site-functions
+    $fpath
+)
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/dotfiles/zsh/.oh-my-zsh
 
@@ -101,15 +110,6 @@ zstyle ':chpwd:*' recent-dirs-insert both
 
 # source our own aliases
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
-
-# fpath setup
-fpath=(
-    # for stuff like pure
-    ~/dotfiles/zsh/.zfunctions
-    # installed manually at the moment
-    /usr/local/share/zsh-completions
-    $fpath
-)
 
 # load Pure prompt
 autoload -U promptinit; promptinit
