@@ -214,6 +214,9 @@ let g:ale_c_cc_options='-std=c17'
 " something sane to use as a default
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
+" whitelist all conf files in my home directory
+let g:ycm_extra_conf_globlist = ['~/*']
+
 " close completion preview after accepting completion
 let g:ycm_autoclose_preview_window_after_completion = 1
 
