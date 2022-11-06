@@ -73,3 +73,6 @@
 [submodule "vim/.vim/bundle/vim-snippets"]
 	path = vim/.vim/bundle/vim-snippets
 	url = https://github.com/honza/vim-snippets
+[submodule "vim/.vim/bundle/coc.nvim"]
+	path = vim/.vim/bundle/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.git

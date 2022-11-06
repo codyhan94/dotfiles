@@ -238,6 +238,13 @@ let g:ycm_semantic_triggers =  {
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => coc.nvim customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" help macvim find node when launched outside of terminal
+let g:coc_node_path = '/opt/homebrew/bin/node'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ultisnips customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make ultisnips play nice with YCM
@@ -361,6 +368,7 @@ if filereadable(expand("~/.vimrc_background"))
 else
     "set bg=light
     "let g:solarized_termcolors=256
+    set termguicolors
     colorscheme base16-tomorrow-night
 endif
 

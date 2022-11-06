@@ -95,8 +95,10 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # set up base16-colors
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        source "$BASE16_SHELL/profile_helper.sh"
 
 # custom ripgrep command
 rg () { command rg -p "$@" | less -RFX; }
@@ -135,6 +137,22 @@ setopt hist_ignore_all_dups
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# check if fasd is installed
+fasd_cache="$HOME/.fasd-init-cache"
+if [[ "$commands[fasd]" -nt "$fasd_cache" || ! -s "$fasd_cache" ]]; then
+  fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
+    zsh-wcomp zsh-wcomp-install >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache
+# how many characters can be skipped to generate a match
+export _FASD_FUZZY=10
+# need to apply the PR for this from github
+export _FASD_RESOLVE_SYMLINKS=1
+autoload -Uz j jd v
+# try fzf-fasd
+source ~/.fzf-fasd.plugin.zsh
 
 # opam configuration
 [[ ! -r /Users/codyhan/.opam/opam-init/init.zsh ]] || source /Users/codyhan/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
