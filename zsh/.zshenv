@@ -35,3 +35,6 @@ export USE_ERROFF=1
 # tell cadence wrapper scripts to use 64bit versions of tools
 export CDS_AUTO_64BIT=ALL
 
+# make auto less print instead of entering pager
+export LESS=-RFX
+

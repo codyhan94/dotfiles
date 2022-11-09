@@ -178,7 +178,7 @@ let g:ctrlp_max_files = 0
 let g:ctrlp_match_current_file = 1
 
 " set up buffer deletion from within ctrlp
-call ctrlp_bdelete#init()
+" call ctrlp_bdelete#init()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -373,9 +373,9 @@ if has("gui_running")
     set guitablabel=%M\ %t
     colorscheme base16-tomorrow-night
 else
-    set background=light
+    set background=dark
     "let g:solarized_termcolors=256
-    colorscheme solarized
+    colorscheme desert
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language

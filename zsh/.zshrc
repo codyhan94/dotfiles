@@ -198,3 +198,7 @@ if [[ "$PROFILE_STARTUP" = true ]]; then
 fi
 #zprof
 
+# fzf keybinds and completion
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
+

@@ -1,0 +1,5 @@
+jd() {
+  local dir
+  local file
+  file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && dir=$(dirname "$file") && cd "$dir"
+}
