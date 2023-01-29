@@ -47,7 +47,7 @@
 set history=500
 
 " disabled plugins
-let g:pathogen_disabled=['syntastic']
+let g:pathogen_disabled=['syntastic', 'YouCompleteMe']
 
 " pathogen infect before filetype stuff
 execute pathogen#infect()
@@ -411,7 +411,7 @@ set tabstop=4
 
 " Linebreak on 500 characters
 set lbr
-set tw=80
+set tw=120
 
 set ai "Auto indent
 set si "Smart indent
