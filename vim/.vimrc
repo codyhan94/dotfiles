@@ -49,6 +49,9 @@ set history=500
 " disabled plugins
 let g:pathogen_disabled=['syntastic', 'YouCompleteMe']
 
+" install fzf for fzf.vim: https://github.com/junegunn/fzf/blob/master/README-VIM.md
+set rtp+=/opt/homebrew/opt/fzf
+
 " pathogen infect before filetype stuff
 execute pathogen#infect()
 
