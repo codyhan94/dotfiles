@@ -123,10 +123,8 @@ path=(
     /opt/homebrew/bin
     ~/bin
     ~/.cabal/bin
+    ~/.cargo/bin
     /usr/local/bin
-    /Developer/NVIDIA/CUDA-5.5/bin
-    /usr/local/opt/llvm/bin
-    /Library/TeX/texbin
     $path
     .
 )
