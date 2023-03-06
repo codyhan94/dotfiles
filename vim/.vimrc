@@ -152,6 +152,30 @@ let g:ctrlp_max_files = 0
 " include current file in match entries
 let g:ctrlp_match_current_file = 1
 
+" fzf git-files
+nnoremap <leader>gf :GFiles<cr>
+
+" fzf RG (https://github.com/junegunn/fzf.vim/blob/master/README.md#example-advanced-ripgrep-integration)
+" also adding the sleep from https://github.com/junegunn/fzf/blob/master/ADVANCED.md#ripgrep-integration
+" to avoid too many background ripgrep processes
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--disabled', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  let spec = fzf#vim#with_preview(spec, 'right', 'ctrl-/')
+  call fzf#vim#grep(initial_command, 1, spec, a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+" add keybinds for scrolling fzf preview window
+let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}'
+\ --bind ctrl-y:preview-up,ctrl-e:preview-down,
+\ctrl-b:preview-page-up,ctrl-f:preview-page-down,
+\ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,
+\shift-up:preview-top,shift-down:preview-bottom,
+\alt-up:half-page-up,alt-down:half-page-down"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tagbar customization
