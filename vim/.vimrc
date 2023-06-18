@@ -223,7 +223,8 @@ let g:delimitMate_jump_expansion=1
 " cpp options
 let g:ale_linters = {
             \ 'cpp': ['g++'],
-            \ 'c': ['gcc']
+            \ 'c': ['gcc'],
+            \ 'rust': ['rustc']
             \ }
 let g:ale_cpp_cc_options='-std=c++20'
 let g:ale_c_cc_options='-std=c17'
