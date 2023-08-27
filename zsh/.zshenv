@@ -1,40 +1,45 @@
-# fix font issues
-export GDK_USE_XFT=1
+# Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
+#
+# Do not modify this file unless you know exactly what you are doing.
+# It is strongly recommended to keep all shell customization and configuration
+# (including exported environment variables such as PATH) in ~/.zshrc or in
+# files sourced from ~/.zshrc. If you are certain that you must export some
+# environment variables in ~/.zshenv, do it where indicated by comments below.
 
-# Append last command to histfile
-export PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
+if [ -n "${ZSH_VERSION-}" ]; then
+  # If you are certain that you must export some environment variables
+  # in ~/.zshenv (see comments at the top!), do it here:
+  #
+  #   export GOPATH=$HOME/go
+  #
+  # Do not change anything else in this file.
 
-# ViVA license
-export CDS_LIC_FILE=5280@sjflex1:5280@sjflex2:5280@sjflex3
+  : ${ZDOTDIR:=~}
+  setopt no_global_rcs
+  [[ -o no_interactive && -z "${Z4H_BOOTSTRAPPING-}" ]] && return
+  setopt no_rcs
+  unset Z4H_BOOTSTRAPPING
+fi
 
-# perl
-export PERL=/grid/common/bin/perl
+Z4H_URL="https://raw.githubusercontent.com/romkatv/zsh4humans/v5"
+: "${Z4H:=${XDG_CACHE_HOME:-$HOME/.cache}/zsh4humans/v5}"
 
-# perforce
-export P4PORT=cicbroker:1666
-export P4CONFIG=p4.config
-export P4MERGE=p4merge
+umask o-w
 
-###############################################################################
-# > PATH MODIFICATIONS
-###############################################################################
+if [ ! -e "$Z4H"/z4h.zsh ]; then
+  mkdir -p -- "$Z4H" || return
+  >&2 printf '\033[33mz4h\033[0m: fetching \033[4mz4h.zsh\033[0m\n'
+  if command -v curl >/dev/null 2>&1; then
+    curl -fsSL -- "$Z4H_URL"/z4h.zsh >"$Z4H"/z4h.zsh.$$ || return
+  elif command -v wget >/dev/null 2>&1; then
+    wget -O-   -- "$Z4H_URL"/z4h.zsh >"$Z4H"/z4h.zsh.$$ || return
+  else
+    >&2 printf '\033[33mz4h\033[0m: please install \033[32mcurl\033[0m or \033[32mwget\033[0m\n'
+    return 1
+  fi
+  mv -- "$Z4H"/z4h.zsh.$$ "$Z4H"/z4h.zsh || return
+fi
 
-export EDITOR="vim"
-export XDG_CONFIG_HOME=$HOME/.config
-export CUPS_SERVER=localhost
+. "$Z4H"/z4h.zsh || return
 
-# for running Qt designer (among other things)
-#root=/home/codyh/ubuild/dfII/ubuild_71848/tools
-#root=/home/codyh/p4builds/617Main/tools
-#export LD_LIBRARY_PATH=$root/lib/64bit:$root/dfII/lib/64bit:$root/Qt/64bit/lib
-# /opt/cuda/lib64:/opt/cuda/lib:$LD_LIBRARY_PATH
-
-# tell compiler to not generate warnings - don't want viva to have warnings
-export USE_ERROFF=1
-
-# tell cadence wrapper scripts to use 64bit versions of tools
-export CDS_AUTO_64BIT=ALL
-
-# make auto less print instead of entering pager
-export LESS=-RFX
-
+setopt rcs
