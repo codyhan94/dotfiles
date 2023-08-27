@@ -1,124 +1,64 @@
-#zmodload zsh/zprof
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# fpath setup
-fpath=(
-    # for stuff like pure
-    ~/dotfiles/zsh/.zfunctions
-    # homebrew completions
-    /opt/homebrew/share/zsh/site-functions
-    $fpath
-)
-
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/dotfiles/zsh/.oh-my-zsh
-
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME=""
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+# Personal Zsh configuration file. It is strongly recommended to keep all
+# shell customization and configuration (including exported environment
+# variables such as PATH) in this file or in files sourced from it.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
 
-# set up base16-colors
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        source "$BASE16_SHELL/profile_helper.sh"
+# Periodic auto-update on Zsh startup: 'ask' or 'no'.
+# You can manually run `z4h update` to update everything.
+zstyle ':z4h:' auto-update      'no'
+# Ask whether to auto-update this often; has no effect if auto-update is 'no'.
+zstyle ':z4h:' auto-update-days '28'
 
-# custom ripgrep command
-#rg () { command rg -p "$@" | less -RFX; }
-rg () { command rg -p -S "$@" | less -RFX; }
+# Keyboard type: 'mac' or 'pc'.
+zstyle ':z4h:bindkey' keyboard  'mac'
 
-# cdr for cd history "cd-recent"
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-add-zsh-hook chpwd chpwd_recent_dirs
-zstyle ':chpwd:*' recent-dirs-max 30
-zstyle ':chpwd:*' recent-dirs-default true
-zstyle ':chpwd:*' recent-dirs-insert both
+# Don't start tmux.
+zstyle ':z4h:' start-tmux       no
 
-# source our own aliases
-[[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
+# Mark up shell's output with semantic information.
+zstyle ':z4h:' term-shell-integration 'yes'
 
-# load Pure prompt
-autoload -U promptinit; promptinit
-prompt pure
+# Right-arrow key accepts one character ('partial-accept') from
+# command autosuggestions or the whole thing ('accept')?
+zstyle ':z4h:autosuggestions' forward-char partial-accept
 
-# path setup
+# Recursively traverse directories when TAB-completing files.
+zstyle ':z4h:fzf-complete' recurse-dirs 'yes'
+
+# re-open fzf with partial match when accepting it with tab
+zstyle ':z4h:fzf-complete' fzf-bindings tab:repeat
+
+# Enable direnv to automatically source .envrc files.
+zstyle ':z4h:direnv'         enable 'no'
+# Show "loading" and "unloading" notifications from direnv.
+zstyle ':z4h:direnv:success' notify 'yes'
+
+# Enable ('yes') or disable ('no') automatic teleportation of z4h over
+# SSH when connecting to these hosts.
+zstyle ':z4h:ssh:example-hostname1'   enable 'yes'
+zstyle ':z4h:ssh:*.example-hostname2' enable 'no'
+# The default value if none of the overrides above match the hostname.
+zstyle ':z4h:ssh:*'                   enable 'no'
+
+# Send these files over to the remote host when connecting over SSH to the
+# enabled hosts.
+zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
+
+# Clone additional Git repositories from GitHub.
+#
+# This doesn't do anything apart from cloning the repository and keeping it
+# up-to-date. Cloned files can be used after `z4h init`. This is just an
+# example. If you don't plan to use Oh My Zsh, delete this line.
+#z4h install ohmyzsh/ohmyzsh || return
+
+# Install or update core components (fzf, zsh-autosuggestions, etc.) and
+# initialize Zsh. After this point console I/O is unavailable until Zsh
+# is fully initialized. Everything that requires user interaction or can
+# perform network I/O must be done above. Everything else is best done below.
+z4h init || return
+
+# Extend PATH.
 typeset -U path
 path=(
     /opt/homebrew/bin
@@ -130,12 +70,50 @@ path=(
     .
 )
 
-# some specific preferences
-unsetopt beep
-setopt hist_ignore_all_dups
+# extend fpath
+fpath=(
+    # for stuff like pure
+    ~/dotfiles/zsh/.zfunctions
+    # homebrew completions
+    /opt/homebrew/share/zsh/site-functions
+    $fpath
+)
 
+# Export environment variables.
+export GPG_TTY=$TTY
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Source additional local files if they exist.
+z4h source ~/.env.zsh
+
+# Use additional Git repositories pulled in with `z4h install`.
+#
+# This is just an example that you should delete. It does nothing useful.
+#z4h source ohmyzsh/ohmyzsh/lib/diagnostics.zsh  # source an individual file
+#z4h load   ohmyzsh/ohmyzsh/plugins/emoji-clock  # load a plugin
+
+# base16 colors
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        source "$BASE16_SHELL/profile_helper.sh"
+
+# Define key bindings.
+z4h bindkey undo Ctrl+/   Shift+Tab  # undo the last command line change
+z4h bindkey redo Option+/            # redo the last undone command line change
+
+z4h bindkey z4h-cd-back    Shift+Left   # cd into the previous directory
+z4h bindkey z4h-cd-forward Shift+Right  # cd into the next directory
+z4h bindkey z4h-cd-up      Shift+Up     # cd into the parent directory
+z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
+
+# Autoload functions.
+autoload -Uz zmv
+
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':chpwd:*' recent-dirs-max 30
+zstyle ':chpwd:*' recent-dirs-default true
+zstyle ':chpwd:*' recent-dirs-insert both
 
 # check if fasd is installed
 fasd_cache="$HOME/.fasd-init-cache"
@@ -150,30 +128,25 @@ export _FASD_FUZZY=10
 # need to apply the PR for this from github
 export _FASD_RESOLVE_SYMLINKS=1
 autoload -Uz j jd v
-# try fzf-fasd
-source ~/.fzf-fasd.plugin.zsh
 
-# opam configuration
-[[ ! -r /Users/codyhan/.opam/opam-init/init.zsh ]] || source /Users/codyhan/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
-    end-of-line
-    vi-forward-char
-    vi-end-of-line
-    vi-add-eol
-)
-ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
-    forward-char
-    forward-word
-    emacs-forward-word
-    vi-forward-word
-    vi-forward-word-end
-    vi-forward-blank-word
-    vi-forward-blank-word-end
-    vi-find-next-char
-    vi-find-next-char-skip
-)
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-#eval "$(starship init zsh)"
+# Define functions and completions.
+function rg() { command rg -p -S "$@" | less -RFX; }
+function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
+compdef _directories md
 
+# Define named directories: ~w <=> Windows home directory on WSL.
+[[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home
+
+# Define aliases.
+alias tree='tree -a -I .git'
+
+[[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
+
+# Add flags to existing aliases.
+alias ls="${aliases[ls]:-ls} -A"
+
+# Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
+setopt glob_dots     # no special treatment for file names with a leading dot
+setopt auto_menu  # require an extra TAB press to open the completion menu
+setopt share_history
