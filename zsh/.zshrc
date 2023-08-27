@@ -101,7 +101,8 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
         source "$BASE16_SHELL/profile_helper.sh"
 
 # custom ripgrep command
-rg () { command rg -p "$@" | less -RFX; }
+#rg () { command rg -p "$@" | less -RFX; }
+rg () { command rg -p -S "$@" | less -RFX; }
 
 # cdr for cd history "cd-recent"
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
@@ -154,3 +155,25 @@ source ~/.fzf-fasd.plugin.zsh
 
 # opam configuration
 [[ ! -r /Users/codyhan/.opam/opam-init/init.zsh ]] || source /Users/codyhan/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
+    end-of-line
+    vi-forward-char
+    vi-end-of-line
+    vi-add-eol
+)
+ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
+    forward-char
+    forward-word
+    emacs-forward-word
+    vi-forward-word
+    vi-forward-word-end
+    vi-forward-blank-word
+    vi-forward-blank-word-end
+    vi-find-next-char
+    vi-find-next-char-skip
+)
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#eval "$(starship init zsh)"
+
