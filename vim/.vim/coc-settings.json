@@ -1,4 +1,9 @@
 {
     "python.formatting.provider": "black",
-    "python.formatting.blackPath": "/opt/homebrew/bin/black"
+    "python.formatting.blackPath": "/opt/homebrew/bin/black",
+    "python.linting.ruffPath": "/opt/homebrew/bin/ruff",
+    "python.linting.enabled": true,
+    "python.linting.ruffEnabled": true,
+    "python.linting.ruffArgs": ["--ignore", "E501"],
+    "pyright.organizeimports.provider": "ruff"
 }
