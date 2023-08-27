@@ -14,6 +14,7 @@ alias ghc-fast='/usr/local/bin/ghc -O2 -optc-O3 -optc-ffast-math -funfolding-use
 alias cdp='cd -l'
 alias cds='cd -1'
 alias ag='ag --pager="less -RFX"'
+alias rg='rg -S'
 # alias python=python2
 
 # New Commands

@@ -116,7 +116,7 @@ export MANPATH="${HOME}/share/man:$MANPATH"
 gvim () { command gvim --remote-tab-silent "$@" || command gvim "$@"; }
 
 # custom ripgrep command
-rg () { command rg -p "$@" | less -RFX; }
+#rg () { command rg -p "$@" | less -RFX; }
 
 # cdr for cd history "cd-recent"
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
@@ -201,4 +201,36 @@ fi
 # fzf keybinds and completion
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 source /usr/share/doc/fzf/examples/completion.zsh
+
+# check if fasd is installed
+fasd_cache="$HOME/.fasd-init-cache"
+if [[ "$commands[fasd]" -nt "$fasd_cache" || ! -s "$fasd_cache" ]]; then
+  fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
+    zsh-wcomp zsh-wcomp-install >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache
+# how many characters can be skipped to generate a match
+export _FASD_FUZZY=10
+# need to apply the PR for this from github
+export _FASD_RESOLVE_SYMLINKS=1
+autoload -Uz j jd v
+# try fzf-fasd
+#source ~/.fzf-fasd.plugin.zsh
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/cody/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/cody/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/cody/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/cody/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
