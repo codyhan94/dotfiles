@@ -26,8 +26,19 @@ zstyle ':z4h:autosuggestions' forward-char partial-accept
 # Recursively traverse directories when TAB-completing files.
 zstyle ':z4h:fzf-complete' recurse-dirs 'yes'
 
+# use ctrl k to go up in all fzf widgets rather than kill-line
+# https://github.com/romkatv/zsh4humans/issues/264
+zstyle ':z4h:*' fzf-bindings ctrl-k:up
+
 # re-open fzf with partial match when accepting it with tab
-zstyle ':z4h:fzf-complete' fzf-bindings tab:repeat
+# need to specify ctrl-k:up binding again here because z4h:fzf-complete
+# is a more specific pattern than z4h:* from above
+zstyle ':z4h:fzf-complete' fzf-bindings tab:repeat ctrl-k:up
+
+# use fuzzy rather than exact search for fzf widget
+# https://github.com/romkatv/zsh4humans/issues/60
+#zstyle ':z4h:(fzf-history|fzf-complete|cd-down)' fzf-flags '--no-exact'
+zstyle ':z4h:*' fzf-flags '--no-exact'
 
 # Enable direnv to automatically source .envrc files.
 zstyle ':z4h:direnv'         enable 'no'
