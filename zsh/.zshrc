@@ -26,6 +26,9 @@ zstyle ':z4h:autosuggestions' forward-char partial-accept
 # Recursively traverse directories when TAB-completing files.
 zstyle ':z4h:fzf-complete' recurse-dirs 'yes'
 
+# do not follow symlinks when tab completing files
+zstyle ':z4h:fzf-complete' find-flags '-P'
+
 # use ctrl k to go up in all fzf widgets rather than kill-line
 # https://github.com/romkatv/zsh4humans/issues/264
 zstyle ':z4h:*' fzf-bindings ctrl-k:up
