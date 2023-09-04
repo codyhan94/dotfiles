@@ -138,7 +138,7 @@ unset fasd_cache
 export _FASD_FUZZY=10
 # need to apply the PR for this from github
 export _FASD_RESOLVE_SYMLINKS=1
-autoload -Uz j jd v
+autoload -Uz j jd v nv
 
 
 # Define functions and completions.
