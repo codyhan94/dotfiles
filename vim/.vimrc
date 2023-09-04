@@ -47,8 +47,7 @@
 set history=500
 
 " disabled plugins
-let g:pathogen_disabled=['syntastic', 'YouCompleteMe', 'minibufexpl.vim']
-
+let g:pathogen_disabled=[]
 " pathogen infect before filetype stuff
 execute pathogen#infect()
 
@@ -375,7 +374,7 @@ if has("gui_running")
 else
     set background=dark
     "let g:solarized_termcolors=256
-    colorscheme desert
+    colorscheme tokyonight-night
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -483,10 +482,8 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers 
 try
-  "set switchbuf=useopen,usetab,newtab
-  " disable usetab so that we can have MBE per tab space properly
-  set switchbuf=useopen
-  set stal=2
+  set switchbuf=useopen,usetab,newtab
+  set stal=1
 catch
 endtry
 

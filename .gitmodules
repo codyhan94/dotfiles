@@ -38,10 +38,6 @@
 	path = vim/.vim/bundle/rainbow
 	url = https://github.com/luochen1990/rainbow
     ignore = dirty
-[submodule "vim/.vim/bundle/syntastic"]
-	path = vim/.vim/bundle/syntastic
-	url = https://github.com/vim-syntastic/syntastic
-    ignore = dirty
 [submodule "vim/.vim/bundle/vim-multiple-cursors"]
 	path = vim/.vim/bundle/vim-multiple-cursors
 	url = https://github.com/terryma/vim-multiple-cursors
@@ -85,3 +81,6 @@
 [submodule "vim/.vim/pack/tpope/start/vim-fugitive"]
 	path = vim/.vim/pack/tpope/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/.vim/pack/remote/start/tokyonight.nvim"]
+	path = vim/.vim/pack/remote/start/tokyonight.nvim
+	url = https://github.com/folke/tokyonight.nvim.git

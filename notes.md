@@ -12,6 +12,7 @@ Starting fresh:
 - `git submodule deinit <submodule_directory>` (may not be necessary anymore)
 - `git rm <submodule_directory>`
 - `rm -rf .git/modules/<submodule_directory>` [cleanup]
-- `git config --remove-section submodule.<path-to-submodule>` [cleanup]
+- `git config --remove-section submodule.<path-to-submodule>` [cleanup, does not
+  seem required anymore]
 - commit and push changes
 
