@@ -14,10 +14,6 @@
 	path = vim/.vim/bundle/ctrlp.vim
 	url = https://github.com/ctrlpvim/ctrlp.vim
     ignore = dirty
-[submodule "vim/.vim/bundle/minibufexpl.vim"]
-	path = vim/.vim/bundle/minibufexpl.vim
-	url = https://github.com/fholgado/minibufexpl.vim
-    ignore = dirty
 [submodule "vim/.vim/bundle/nerdcommenter"]
 	path = vim/.vim/bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter
@@ -82,11 +78,10 @@
 	path = vim/.vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar
     ignore = dirty
-[submodule "vim/.vim/bundle/YouCompleteMe"]
-	path = vim/.vim/bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe
-    ignore = dirty
 [submodule "vim/.vim/pack/coc/start/coc.nvim"]
 	path = vim/.vim/pack/coc/start/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
     branch = release
+[submodule "vim/.vim/pack/tpope/start/vim-fugitive"]
+	path = vim/.vim/pack/tpope/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
