@@ -43,6 +43,10 @@ zstyle ':z4h:fzf-complete' fzf-bindings tab:repeat ctrl-k:up
 #zstyle ':z4h:(fzf-history|fzf-complete|cd-down)' fzf-flags '--no-exact'
 #zstyle ':z4h:*' fzf-flags '--no-exact'
 
+# resolve symlinks and add path excludes for dir history search
+# https://github.com/romkatv/zsh4humans/issues/278
+zstyle -e :z4h:dir-history: cwd 'reply=("${${PWD:A}:#*/(bazel-bin|bazel-out)*}")'
+
 # Enable direnv to automatically source .envrc files.
 zstyle ':z4h:direnv'         enable 'no'
 # Show "loading" and "unloading" notifications from direnv.
