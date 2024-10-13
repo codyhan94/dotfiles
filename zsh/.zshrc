@@ -164,4 +164,4 @@ alias ls="${aliases[ls]:-ls} -A"
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt auto_menu  # require an extra TAB press to open the completion menu
 setopt share_history
-setopt hist_ignore_space
+setopt hist_ignore_space  # prefix command with space to avoid saving to history
