@@ -42,6 +42,7 @@ alias rkupd='sudo rkhunter --propupd'
 alias rkhunt='sudo rkhunter --check --noappend-log --skip-keypress'
 alias ssh-sess='eval $(ssh-agent) && ssh-add'
 alias caltechvpn='sudo openconnect -b --script ~/bin/vpnc-script --authgroup 1-Tunnel-Caltech-Traffic-Only -u chhan https://vpn.caltech.edu'
+alias rg='rg -S'
 
 # Pacman
 alias pac="sudo /usr/bin/pacman -S"             # install one or more packages

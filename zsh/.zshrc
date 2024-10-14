@@ -130,22 +130,22 @@ zstyle ':chpwd:*' recent-dirs-default true
 zstyle ':chpwd:*' recent-dirs-insert both
 
 # check if fasd is installed
-fasd_cache="$HOME/.fasd-init-cache"
-if [[ "$commands[fasd]" -nt "$fasd_cache" || ! -s "$fasd_cache" ]]; then
-  fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
-    zsh-wcomp zsh-wcomp-install >| "$fasd_cache"
-fi
-source "$fasd_cache"
-unset fasd_cache
+#fasd_cache="$HOME/.fasd-init-cache"
+#if [[ "$commands[fasd]" -nt "$fasd_cache" || ! -s "$fasd_cache" ]]; then
+  #fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install \
+    #zsh-wcomp zsh-wcomp-install >| "$fasd_cache"
+#fi
+#source "$fasd_cache"
+#unset fasd_cache
 # how many characters can be skipped to generate a match
-export _FASD_FUZZY=10
+#export _FASD_FUZZY=10
 # need to apply the PR for this from github
-export _FASD_RESOLVE_SYMLINKS=1
+#export _FASD_RESOLVE_SYMLINKS=1
 autoload -Uz j jd v
 
 
 # Define functions and completions.
-function rg() { command rg -p -S "$@" | less -RFX; }
+#function rg() { command rg -p -S "$@" | less -RFX; }
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
 
@@ -164,4 +164,7 @@ alias ls="${aliases[ls]:-ls} -A"
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt auto_menu  # require an extra TAB press to open the completion menu
 setopt share_history
+# do not save duplicates in histfile
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
 setopt hist_ignore_space  # prefix command with space to avoid saving to history
