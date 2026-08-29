@@ -77,6 +77,7 @@ typeset -U path
 path=(
     /opt/homebrew/bin
     ~/bin
+    ~/.local/bin
     ~/.cabal/bin
     ~/.cargo/bin
     /usr/local/bin
@@ -183,21 +184,28 @@ export PATH="$PATH:/Users/cody/.cache/lm-studio/bin"
 
 
 # >>> mamba initialize >>>
-# !! Contents within this block are managed by 'micromamba shell init' !!
-export MAMBA_EXE='/opt/homebrew/bin/micromamba';
+# !! Contents within this block are managed by 'mamba shell init' !!
+export MAMBA_EXE='/opt/homebrew/opt/micromamba/bin/mamba';
 export MAMBA_ROOT_PREFIX='/Users/cody/micromamba';
 __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__mamba_setup"
+    # Manual fix: Register mamba completion using the function defined by the hook
+    if type complete &>/dev/null && type _umamba_zsh_completions &>/dev/null; then
+        complete -o default -F _umamba_zsh_completions mamba
+    fi
 else
-    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
+    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
 fi
-# give mamba the same completions as micromamba
-autoload -Uz bashcompinit
-bashcompinit
-_mamba_zsh_completions() {
-    _bash_complete -o default -F _umamba_zsh_completions
-}
-
-compdef _mamba_zsh_completions mamba
+unset __mamba_setup
 # <<< mamba initialize <<<
+
+# give mamba the same completions as micromamba
+# autoload -Uz bashcompinit
+# bashcompinit
+# _mamba_zsh_completions() {
+#     _bash_complete -o default -F _umamba_zsh_completions
+# }
+# compdef _mamba_zsh_completions mamba
+
+
