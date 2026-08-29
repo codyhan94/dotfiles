@@ -1,0 +1,190 @@
+#!/usr/bin/env python3
+"""Browse Claude Code session transcripts in fzf; print or trash the selected ones.
+
+Enter prints the transcript paths, alt-d moves them to the trash.
+"""
+
+import json
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+from pathlib import Path
+
+PROJECTS = Path.home() / ".claude" / "projects"
+HOME = str(Path.home())
+
+# Records that carry a human-readable label, best first.
+TITLE_KEYS = [("custom-title", "customTitle"), ("ai-title", "aiTitle"), ("summary", "summary")]
+MARKERS = ("Title", "summary", "last-prompt", '"cwd"', '"user"')
+
+
+def human_size(n):
+    for unit in ("B", "K", "M", "G"):
+        if n < 1024 or unit == "G":
+            return f"{n:.0f}{unit}" if unit == "B" or n >= 10 else f"{n:.1f}{unit}"
+        n /= 1024
+
+
+def tilde(p):
+    return "~" + p[len(HOME):] if p.startswith(HOME) else p
+
+
+def dir_size(path):
+    return sum(f.stat().st_size for f in path.rglob("*") if f.is_file())
+
+
+def message_text(content):
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        parts = [b.get("text", "") for b in content if isinstance(b, dict) and b.get("type") == "text"]
+        return " ".join(p for p in parts if p)
+    return ""
+
+
+def scan(path):
+    """Pull the display fields out of one transcript without parsing every line."""
+    titles, cwd, first_prompt, last_prompt, turns = {}, None, None, None, 0
+    with path.open(encoding="utf-8", errors="replace") as fh:
+        for line in fh:
+            # Substring prefilter: json.loads on every line of a multi-MB
+            # transcript dominates the scan, and we only want a few record types.
+            if not any(m in line for m in MARKERS):
+                continue
+            try:
+                rec = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(rec, dict):
+                continue
+            rtype = rec.get("type")
+            for kind, key in TITLE_KEYS:
+                if rtype == kind and rec.get(key):
+                    titles[kind] = rec[key]
+            if rtype == "last-prompt" and rec.get("lastPrompt"):
+                last_prompt = rec["lastPrompt"]
+            if cwd is None and rec.get("cwd"):
+                cwd = rec["cwd"]
+            if rtype == "user" and isinstance(rec.get("message"), dict):
+                text = message_text(rec["message"].get("content"))
+                if text and not text.startswith("<"):
+                    turns += 1
+                    if first_prompt is None:
+                        first_prompt = text
+
+    title = next((titles[k] for k, _ in TITLE_KEYS if k in titles), None)
+    title = title or last_prompt or first_prompt or "(no title)"
+
+    # A session's bytes are spread across the transcript, its subagent
+    # directory, and any .bak the CLI left behind. Delete and size them together.
+    extras = [p for p in (path.with_suffix(".jsonl.bak"), path.with_suffix("")) if p.exists()]
+    size = path.stat().st_size + sum(dir_size(p) if p.is_dir() else p.stat().st_size for p in extras)
+
+    return {
+        "id": path.stem,
+        "path": str(path),
+        "extras": [str(p) for p in extras],
+        "slug": path.parent.name,
+        "cwd": cwd,
+        "title": " ".join(title.split()),
+        "first_prompt": first_prompt,
+        "last_prompt": last_prompt,
+        "turns": turns,
+        "mtime": path.stat().st_mtime,
+        "size": size,
+    }
+
+
+def collect():
+    # Only top-level *.jsonl files are sessions; nested ones are subagent
+    # transcripts, and memory/ holds notes that must never be touched.
+    sessions = [scan(p) for p in PROJECTS.glob("*/*.jsonl")]
+    return sorted(sessions, key=lambda s: s["mtime"], reverse=True)
+
+
+def preview(cache_path, index):
+    s = json.loads(Path(cache_path).read_text())[int(index)]
+    out = [
+        f"\033[1m{s['title']}\033[0m",
+        "",
+        f"session   {s['id']}",
+        f"cwd       {tilde(s['cwd']) if s['cwd'] else '(unknown) ' + s['slug']}",
+        f"modified  {time.strftime('%Y-%m-%d %H:%M', time.localtime(s['mtime']))}",
+        f"size      {human_size(s['size'])} across {1 + len(s['extras'])} path(s)",
+        f"turns     {s['turns']}",
+    ]
+    for label, text in (("first", s["first_prompt"]), ("last", s["last_prompt"])):
+        if text:
+            out += ["", f"\033[36m{label} prompt\033[0m", " ".join(text.split())[:600]]
+    print("\n".join(out))
+
+
+def trash(paths):
+    cmd = next((c for c in ("trash", "trash-put") if shutil.which(c)), None)
+    if not cmd:
+        sys.exit("csesh: no 'trash' or 'trash-put' on PATH")
+    subprocess.run([cmd, *paths], check=True)
+
+
+def main():
+    if len(sys.argv) == 4 and sys.argv[1] == "--preview":
+        return preview(sys.argv[2], sys.argv[3])
+
+    sessions = collect()
+    if not sessions:
+        sys.exit(f"csesh: no sessions under {tilde(str(PROJECTS))}")
+
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as fh:
+        json.dump(sessions, fh)
+        cache = fh.name
+
+    try:
+        rows = []
+        for i, s in enumerate(sessions):
+            when = time.strftime("%Y-%m-%d %H:%M", time.localtime(s["mtime"]))
+            where = tilde(s["cwd"]) if s["cwd"] else s["slug"]
+            rows.append(f"{i}\t{when}  {human_size(s['size']):>6}  {where[-34:]:<34}  {s['title']}  {s['id']}")
+
+        result = subprocess.run(
+            [
+                "fzf", "--multi", "--ansi", "--expect=alt-d",
+                "--delimiter=\t", "--with-nth=2..",
+                "--preview", f"{sys.argv[0]} --preview {cache} {{1}}",
+                "--preview-window=down:12:wrap",
+                "--header", "enter: print paths   alt-d: trash   tab: multi-select",
+            ],
+            input="\n".join(rows),
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode not in (0, 1):
+            return
+        lines = result.stdout.splitlines()
+        if not lines:
+            return
+
+        key, picks = lines[0], [sessions[int(l.split("\t")[0])] for l in lines[1:]]
+        if not picks:
+            return
+
+        paths = [p for s in picks for p in (s["path"], *s["extras"])]
+        if key != "alt-d":
+            print("\n".join(paths))
+            return
+
+        total = sum(s["size"] for s in picks)
+        print(f"Trash {len(picks)} session(s), {len(paths)} path(s), {human_size(total)}:", file=sys.stderr)
+        for s in picks:
+            print(f"  {s['id']}  {s['title'][:60]}", file=sys.stderr)
+        if input("Proceed? [y/N] ").strip().lower() != "y":
+            return sys.exit("aborted")
+        trash(paths)
+    finally:
+        os.unlink(cache)
+
+
+if __name__ == "__main__":
+    main()
